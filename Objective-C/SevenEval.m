@@ -17,10 +17,9 @@
 #pragma mark Memory Lifecycle
 #pragma mark -
 
-// Always call +theEvaluator, don't create your own instance.
-+ (SevenEval*) theEvaluator
++ (SevenEval *) anEvaluator
 {
-  static SevenEval* the_evaluator;
+  SevenEval * the_evaluator;
   if (the_evaluator == nil)
    {
     the_evaluator = [[SevenEval alloc] init];

@@ -12,37 +12,8 @@
 @implementation FiveEval
 
 #pragma mark -
-#pragma mark Memory Lifecycle
-#pragma mark -
-
-+ (FiveEval*) theEvaluator
-{
-  static FiveEval* the_evaluator;
-  if (the_evaluator == nil)
-   {
-    the_evaluator = [[FiveEval alloc] init];
-    return the_evaluator;
-   }
-  return the_evaluator;
-}
-
-- (id) init
-{
-	if(self == [super init])
-   {
-		[self generateDeck];
-		[self generateRanks];
-   }
-	return self;
-}
-
-+ (void) releaseTheEvaluator
-{
-  FiveEval* theEvaluator = [FiveEval theEvaluator];
-  [theEvaluator release];
-}
-
 #pragma mark Generation
+#pragma mark -
 
 - (void) generateDeck
 {
@@ -241,7 +212,40 @@
    }
 }
 
+#pragma mark -
+#pragma mark Memory
+#pragma mark -
+
++ (FiveEval *) theEvaluator
+{
+  static FiveEval * the_evaluator;
+  if (the_evaluator == nil)
+  {
+    the_evaluator = [[FiveEval alloc] init];
+    return the_evaluator;
+  }
+  return the_evaluator;
+}
+
+- (id) init
+{
+	if(self == [super init])
+  {
+		[self generateDeck];
+		[self generateRanks];
+  }
+	return self;
+}
+
++ (void) releaseTheEvaluator
+{
+  FiveEval* theEvaluator = [FiveEval theEvaluator];
+  [theEvaluator release];
+}
+
+#pragma mark -
 #pragma mark Ranker
+#pragma mark -
 
 - (short) getRankOfFive:(const int) CARD1 :(const int) CARD2 :(const int) CARD3
                        :(const int) CARD4 :(const int) CARD5

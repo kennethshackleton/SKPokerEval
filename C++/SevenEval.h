@@ -12,16 +12,15 @@
 
 #include "Constants.h"
 
-class SevenEval
-{
+class SevenEval {
  private:
 	
 	unsigned short rankArray[CIRCUMFERENCE_SEVEN];
-	unsigned short flushRankArray[MAX_SEVEN_FLUSH_KEY_INT + 1];
+	unsigned short flushRankArray[MAX_SEVEN_FLUSH_KEY_INT+1];
 	unsigned long deckcardsKey[DECK_SIZE];
 	unsigned short deckcardsFlush[DECK_SIZE];
 	unsigned short deckcardsSuit[DECK_SIZE];	
-	short flushCheck[MAX_FLUSH_CHECK_SUM + 1];
+	short flushCheck[MAX_FLUSH_CHECK_SUM+1];
   
  public:
 	/*!
@@ -34,9 +33,8 @@ class SevenEval
 	 */
   ~SevenEval();
   
-  short getRankOfSeven(const int CARD1, const int CARD2, const int CARD3,
-                       const int CARD4, const int CARD5, const int CARD6,
-                       const int CARD7);
+  short getRankOfSeven(const int CARD1, const int CARD2, const int CARD3, const int CARD4, const int CARD5, const int CARD6, const int CARD7);
+  void validateAgainstFiveEval();
 };
 
 #endif

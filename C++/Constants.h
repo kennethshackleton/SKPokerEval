@@ -42,6 +42,13 @@
 
 #define DECK_SIZE 52
 
+#define MAX_NUMBER_OF_UNDEALT_CARDS DECK_SIZE-4
+
+#define MAX_NUMBER_OF_PLAYERS 8
+#define MIN_NUMBER_OF_PLAYERS 2
+
+#define MAX_NUMBER_OF_TABLE_CARDS 5
+
 #define INDEX_OF_SEVEN_OF_SPADES 32
 #define INDEX_OF_EIGHT_OF_CLUBS 31
 
@@ -133,7 +140,26 @@
 #define NOT_A_FLUSH -1
 /////////
 
-//Bit masks
+  //Bit masks
 #define SUIT_BIT_MASK 511
 #define NON_FLUSH_BIT_SHIFT 9
-/////////
+  /////////
+
+  //Notional pot size
+  //2^32 = 4,294,967,296
+  //LCM of 2..12 is 27720
+  //LCM of 2..9 is 2520
+  //LCM of 2..8 is 840
+  //with CAKE=840 the total equity in headsup is 1,438,335,360
+  //the largest 32-bit integer is 4,294,967,296
+#define CAKE 840
+  /////////
+
+#define EQUITY_TWO 1438335360
+#define EQUITY_THREE 1151433360
+#define EQUITY_FOUR 912246720
+#define EQUITY_FIVE 714561120
+#define EQUITY_SIX 552726720
+#define EQUITY_SEVEN 421631280
+#define EQUITY_EIGHT 316673280
+#define EQUITY {EQUITY_TWO, EQUITY_THREE, EQUITY_FOUR, EQUITY_FIVE, EQUITY_SIX, EQUITY_SEVEN, EQUITY_EIGHT}
