@@ -32,17 +32,10 @@ import static com.SpecialK.SpecialKEval.Constants.*;
 import com.SpecialK.SpecialKEval.FiveEval;
 
 public class SevenEval {
-	
 	public SevenEval() {
-		
-		System.out.println("Initialising Deck");
 		initialiseDeck();
-		System.out.println("Initialising Ranking");
 		initialiseRanking();
-		System.out.println("Initialising FlushCheck");
 		generateFlushCheck();
-		System.out.println("Initialising complete");
-		
 	}
 	
 	//Ranks for 5-card evaluation separated
@@ -60,7 +53,6 @@ public class SevenEval {
 	private short[] flushCheckArray;
 	
 	private void initialiseDeck() {
-		
 		deckcardsKey = new long[DECK_SIZE];
 		deckcardsFlush = new int[DECK_SIZE];
 		deckcardsSuit = new int[DECK_SIZE];
@@ -70,7 +62,7 @@ public class SevenEval {
 		//are different.
 		int[] face = { ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO };
 		int[] faceflush = {	ACE_FLUSH, KING_FLUSH, QUEEN_FLUSH, JACK_FLUSH, TEN_FLUSH, NINE_FLUSH,
-      EIGHT_FLUSH, SEVEN_FLUSH, SIX_FLUSH, FIVE_FLUSH, FOUR_FLUSH, THREE_FLUSH, TWO_FLUSH };
+							EIGHT_FLUSH, SEVEN_FLUSH, SIX_FLUSH, FIVE_FLUSH, FOUR_FLUSH, THREE_FLUSH, TWO_FLUSH };
 		int n=0;
 		for (n=0; n<13; n++) {					
 			deckcardsKey[4*n]		= (face[n] << NON_FLUSH_BIT_SHIFT) + SPADE;
@@ -105,7 +97,7 @@ public class SevenEval {
 							TEN_FLUSH, NINE_FLUSH, EIGHT_FLUSH, SEVEN_FLUSH,
 							SIX_FLUSH, FIVE_FLUSH, FOUR_FLUSH, THREE_FLUSH,
 							TWO_FLUSH};
-		int i, j, k, l, m, n, p, count=0;
+		int i, j, k, l, m, n, p;
 		
 		//Clean all ranks and flushranks
 		for(i=0; i<MAX_NONFLUSH_KEY_INT+1; i++){rankArray[i]=0;}
@@ -115,13 +107,13 @@ public class SevenEval {
 		for(i=1; i<13; i++){for(j=1; j<=i; j++){for(k=1; k<=j; k++){for(l=0; l<=k; l++){
 			for(m=0; m<=l; m++){for(n=0; n<=m; n++){for(p=0; p<=n; p++){
 				
-				if(i!=m && j!=n && k!=p){
-					
+				if (i!=m && j!=n && k!=p)
+				{
 					int key=face[i]+face[j]+face[k]+face[l]+face[m]+face[n]+face[p];
 					
 					//The 4*i+0 and 4*m+1 trick prevents flushes
 					int rank=fiveEval.getBestRankOf(4*i, 4*j, 4*k, 4*l, 4*m+1, 4*n+1, 4*p+1);
-					rankArray[key]=rank; count++;}}}}}}}}
+					rankArray[key]=rank;}}}}}}}}
 		
 		//Flush ranks
 		//All 7 same suit:
@@ -132,7 +124,7 @@ public class SevenEval {
 																		faceFlush[n]+faceFlush[p];				
 				int rank=fiveEval.getBestRankOf(4*i, 4*j, 4*k, 4*l, 4*m, 4*n, 4*p);
 
-				flushRankArray[key]=rank; count++;}}}}}}}
+				flushRankArray[key]=rank;}}}}}}}
 		
 		//Only 6 same suit:
 		for(i=5; i<13; i++){for(j=4; j<i; j++){for(k=3; k<j; k++){for(l=2; l<k; l++){
@@ -144,7 +136,7 @@ public class SevenEval {
 				//other cards are all spades
 				int rank=fiveEval.getBestRankOf(4*i, 4*j, 4*k, 4*l, 4*m, 4*n, 51);
 				
-				flushRankArray[key]=rank; count++;}}}}}}
+				flushRankArray[key]=rank;}}}}}}
 		
 		//Only 5 same suit:
 		for(i=4; i<13; i++){for(j=3; j<i; j++){for(k=2; k<j; k++){for(l=1; l<k; l++){
@@ -154,7 +146,7 @@ public class SevenEval {
 				
 				int rank=fiveEval.getRankOf(4*i, 4*j, 4*k, 4*l, 4*m);
 
-				flushRankArray[key]=rank; count++;}}}}}		
+				flushRankArray[key]=rank;}}}}}		
 	}
 
 	private void generateFlushCheck() {
@@ -224,29 +216,50 @@ public class SevenEval {
 					deckcardsKey[CARD5] +
 					deckcardsKey[CARD6] +
 					deckcardsKey[CARD7];
-						
-    int FLUSH_CHECK_KEY = (int)( KEY & SUIT_BIT_MASK );
+					
+    int FLUSH_CHECK_KEY = (int)(KEY & SUIT_BIT_MASK);
     int FLUSH_SUIT = flushCheckArray[FLUSH_CHECK_KEY];
     
-		if (FLUSH_SUIT == NOT_A_FLUSH) {
-			
+		if (FLUSH_SUIT < 0) {
 			KEY = KEY >> NON_FLUSH_BIT_SHIFT;
-			
 			return rankArray[(int)KEY];
-		
-		}
-		
-		else {
-			
-			KEY = (deckcardsSuit[CARD1] == FLUSH_SUIT ? 1 : 0) * deckcardsFlush[CARD1] +
-				  (deckcardsSuit[CARD2] == FLUSH_SUIT ? 1 : 0) * deckcardsFlush[CARD2] +
-				  (deckcardsSuit[CARD3] == FLUSH_SUIT ? 1 : 0) * deckcardsFlush[CARD3] +
-				  (deckcardsSuit[CARD4] == FLUSH_SUIT ? 1 : 0) * deckcardsFlush[CARD4] +
-				  (deckcardsSuit[CARD5] == FLUSH_SUIT ? 1 : 0) * deckcardsFlush[CARD5] +
-            	  (deckcardsSuit[CARD6] == FLUSH_SUIT ? 1 : 0) * deckcardsFlush[CARD6] +
-            	  (deckcardsSuit[CARD7] == FLUSH_SUIT ? 1 : 0) * deckcardsFlush[CARD7];
-						
+		} else {
+			KEY = (deckcardsSuit[CARD1] == FLUSH_SUIT ? deckcardsFlush[CARD1] : 0) +
+				  (deckcardsSuit[CARD2] == FLUSH_SUIT ? deckcardsFlush[CARD2] : 0) +
+				  (deckcardsSuit[CARD3] == FLUSH_SUIT ? deckcardsFlush[CARD3] : 0) +
+				  (deckcardsSuit[CARD4] == FLUSH_SUIT ? deckcardsFlush[CARD4] : 0) +
+				  (deckcardsSuit[CARD5] == FLUSH_SUIT ? deckcardsFlush[CARD5] : 0) +
+            	  (deckcardsSuit[CARD6] == FLUSH_SUIT ? deckcardsFlush[CARD6] : 0) +
+            	  (deckcardsSuit[CARD7] == FLUSH_SUIT ? deckcardsFlush[CARD7] : 0);
 			return flushRankArray[(int)KEY];
-		}	
+		}
+	}
+	
+	public void testValidityOfRanks() {
+		FiveEval fiveEval = new FiveEval();
+		System.out.println("testing ranks...\n");
+		for (int i = 6; i < 52; i++) {
+			for (int j = 5; j < i; j++) {
+				for (int k = 4; k < j; k++) {
+					System.out.println("" + i + "_" + j + "_" + k + "\n");
+					for (int l = 3; l < k; l++) {
+						for (int m = 2; m < l; m++) {
+							for (int p = 1; p < m; p++) {
+								for (int q = 0; q < p; q++) {
+									int rankOne = fiveEval.getBestRankOf(i, j, k, l, m, p, q);
+									int rankTwo = this.getRankOf(i, j, k, l, m, p, q);
+									if (rankOne != rankTwo) {
+										System.out.println("\n" + rankOne + "_" + rankTwo + "::" + i + "_" + "_" + j + "_" + k + "_" + l + "_" +
+															m + "_" + p + "_" + q);
+										return;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		System.out.println("SevenEval and FiveEval agree everywhere.");
 	}
 }
