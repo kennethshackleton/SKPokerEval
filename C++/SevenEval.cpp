@@ -200,7 +200,7 @@ short SevenEval::getRankOfSeven(const int CARD1, const int CARD2, const int CARD
     
     // Take key modulo the circumference. A dichotomy is faster than using the usual modulus operation. This is fine for us because the is more than half the
     // largest face key we come across.
-    return rankArray[(KEY < CIRCUMFERENCE_SEVEN ? KEY : KEY - CIRCUMFERENCE_SEVEN)];    
+    return rankArray[(KEY < CIRCUMFERENCE_SEVEN ? KEY : KEY - CIRCUMFERENCE_SEVEN)];   
 	} else {
     // Generate a flush key, and look up the rank.
 		int FLUSH_KEY = (deckcardsSuit[CARD1] == FLUSH_SUIT ? deckcardsFlush[CARD1] : 0) +
@@ -212,7 +212,7 @@ short SevenEval::getRankOfSeven(const int CARD1, const int CARD2, const int CARD
 										(deckcardsSuit[CARD7] == FLUSH_SUIT ? deckcardsFlush[CARD7] : 0);
 		return flushRankArray[FLUSH_KEY];
 	}
-	return -1;	
+	return -1;
 }
 
 #pragma mark -
