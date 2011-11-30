@@ -39,13 +39,13 @@
   // very large, to allow the evaluator to get up
   // to speed, and divisible by 7. Also close any
   // other applications that are open.
-  #define BIG_NUMBER 100000000*7
+  #define BIG_NUMBER 300000000*7
 
 class HandEval {
  private:
   
     // Uncomment when timing.
-    short hands_array[BIG_NUMBER];
+    char hands_array[BIG_NUMBER];
   
     /*!
      Ranks for 7-card evaluation separated
@@ -53,7 +53,7 @@ class HandEval {
      their own respective keys
      */
 	unsigned short rankArray[CIRCUMFERENCE_SEVEN];
-	unsigned short flushRankArray[MAX_SEVEN_FLUSH_KEY_INT + 1];
+	unsigned short flushRankArray[MAX_SEVEN_FLUSH_KEY_INT+1];
   
     /*!
      Card face values beginning with ACE_ from
