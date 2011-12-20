@@ -490,20 +490,20 @@ public class HandEval {
 		
 		return s;		
 	}
-
+  
+  /*
 	public String computeFlopEquityForSpecificCards(int[] holeCards, int[] tableCards, int number_of_players) {
 		return null;
 	}
 
-	public String computeTurnEquityForSpecificCards(int[] holeCards, int[] table_cards, int number_of_players)
-	{
+	public String computeTurnEquityForSpecificCards(int[] holeCards, int[] table_cards, int number_of_players) {
 		return null;
 	}
 
-	public String computeRiverEquityForSpecificCards(int[] holeCards, int[] table_cards, int number_of_players)
-	{
+	public String computeRiverEquityForSpecificCards(int[] holeCards, int[] table_cards, int number_of_players) {
 		return null;
 	}
+   */
 	
 	void timeRankMethod() {
 		//Testing only.
