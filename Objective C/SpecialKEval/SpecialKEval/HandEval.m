@@ -38,9 +38,11 @@
 #import "FiveEval.h"
 
 @interface HandEval()
+
 - (void)generateDeckKeys;
 - (void)generateRanks;
 - (void)generateFlushCheck;
+
 @end
 
 @implementation HandEval
@@ -48,7 +50,8 @@
 #pragma mark -
 #pragma mark Memory
 
-- (id)init {
+- (id)init
+{
   if (self = [super init]) {
 		[self generateDeckKeys];
 		[self generateRanks];
@@ -60,7 +63,8 @@
 #pragma mark -
 #pragma mark Generation
 
-- (void)generateDeckKeys {	
+- (void)generateDeckKeys
+{	
 	// Enter face values into arrays to later build up the respective keys. The values of ACE and ACE_FLUSH etc. are different.
 	int face[13] = {ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO};
 	
@@ -85,7 +89,8 @@
 	}
 }
 
-- (void)generateRanks {
+- (void)generateRanks
+{
 	// Zero out all ranks and flushranks.
 	for (int i = 0; i < MAX_SEVEN_FLUSH_KEY_INT + 1; i++) {
     flushRankArray[i] = 0;
@@ -177,7 +182,8 @@
 	[FiveEval releaseToNilSharedEvaluator];	
 }
 
-- (void)generateFlushCheck {
+- (void)generateFlushCheck
+{
 	short SUIT_COUNT = 0, FLUSH_SUIT_INDEX = -1, CARDS_MATCHED_SO_FAR = 0;
 	short SUIT_KEY = SPADE;
 	short suits[4] = {SPADE, HEART, DIAMOND, CLUB};

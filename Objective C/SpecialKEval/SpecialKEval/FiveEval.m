@@ -46,7 +46,7 @@
 #pragma mark Memory
 
 - (id)init {
-	if (self == [super init]) {
+	if (self = [super init]) {
 		[self generateDeck];
 		[self generateRanks];
   }
