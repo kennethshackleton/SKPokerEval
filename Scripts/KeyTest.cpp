@@ -46,10 +46,6 @@ using namespace std;
 bool sums[8000000];
 
 int main (int argc, char * const argv[]) {
-    // insert code here...
-	typedef enum ranks {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	
-	ranks rankArray[1]={11];
 	
 	int face[13]={ACE, KING, QUEEN, JACK, TEN, NINE,
 		EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO};
