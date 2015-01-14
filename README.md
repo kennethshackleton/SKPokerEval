@@ -1,6 +1,6 @@
 # SpecialKEval
 
-SpecialKEval is a light-weight Texas Hold'em 5- and 7-card hand evaluator 
+SpecialKEval is a lightweight Texas Hold'em 5- and 7-card hand evaluator 
 written in C++.
 
 ## Example
