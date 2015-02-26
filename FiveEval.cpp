@@ -35,9 +35,7 @@ FiveEval::FiveEval() {
       for (int k = 2; k < j; ++k) {
         for (int l = 1; l < k; ++l) {
           // No straights.
-          for (int m = 0; m < l &&
-              !(i-m == 4 || (i == 12 && j == 3 && k == 2 && l == 1 && m == 0));
-              ++m) {
+          for (int m = 0; m < l && !(i-m == 4 || (i == 12 && j == 3)); ++m) {
             mRankArray[face[i] + face[j] + face[k] + face[l] + face[m]] = n++;
           }
         }
@@ -94,10 +92,9 @@ FiveEval::FiveEval() {
   for (int i = 5; i < NUMBER_OF_FACES; ++i) {
     for (int j = 3; j < i; ++j) {
       for (int k = 2; k < j; ++k) {
-        for (int l = 1; l <k ; ++l) {
+        for (int l = 1; l < k ; ++l) {
           for (int m = 0; m < l; ++m) {
-            if (!(i-m == 4 ||
-                (i == 12 && j == 3 && k == 2 && l == 1 && m == 0))) {
+            if (!(i-m == 4 || (i == 12 && j == 3))) {
               mFlushRankArray[face_flush[i] + face_flush[j] + face_flush[k] +
                   face_flush[l] + face_flush[m]] = n++;
             }
