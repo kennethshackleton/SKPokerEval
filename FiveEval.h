@@ -24,24 +24,24 @@
 
 class FiveEval {
 public:
- FiveEval();
- ~FiveEval();
- // Get the rank of a hand comprising five cards, each represented by an
- // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
- // The higher the rank the better the hand. Two hands of equal rank tie.
- short unsigned GetRank(int const, int const, int const, int const,
-         int const) const;
- // Get the rank of a hand comprising seven cards, each represented by an
- // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
- // The higher the rank the better the hand. Two hands of equal rank tie.
- short unsigned GetRank(int const, int const, int const, int const,
-         int const, const int, int const) const;
+  FiveEval();
+  ~FiveEval();
+  // Get the rank of a hand comprising five cards, each represented by an
+  // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
+  // The higher the rank the better the hand. Two hands of equal rank tie.
+  short unsigned GetRank(int const, int const, int const, int const,
+                         int const) const;
+  // Get the rank of a hand comprising seven cards, each represented by an
+  // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
+  // The higher the rank the better the hand. Two hands of equal rank tie.
+  short unsigned GetRank(int const, int const, int const, int const,
+                         int const, const int, int const) const;
 private:
- short unsigned mRankArray[MAX_FIVE_NONFLUSH_KEY_INT+1];
- short unsigned mFlushRankArray[MAX_FIVE_FLUSH_KEY_INT+1];
- int unsigned mDeckcardsFace[DECK_SIZE];
- short unsigned mDeckcardsFlush[DECK_SIZE];
- short unsigned mDeckcardsSuit[DECK_SIZE];
+  short unsigned *mRankPtr;
+  short unsigned *mFlushRankPtr;
+  int unsigned mDeckcardsFace[DECK_SIZE];
+  short unsigned mDeckcardsFlush[DECK_SIZE];
+  short unsigned mDeckcardsSuit[DECK_SIZE];
 };
 
 #endif
