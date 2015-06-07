@@ -2,3 +2,4 @@ language: cpp
 compiler:
   - gcc
   - clang
+script: ./configure && make && make test && ctest && gtests && rm eval_tests

@@ -42,9 +42,8 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
             for (int n = 0; n <= m; ++n) {
               for (int p = 0; p <= n; ++p) {
                 if (i != m && j != n && k != p) {
-                  int const key = face[i] + face[j] + face[k]
-                  + face[l] + face[m] + face[n] +
-                  face[p];
+                  int const key = face[i] + face[j] + face[k] + face[l] +
+                      face[m] + face[n] + face[p];
                   // The (4*i)+0 and (4*m)+1 trick prevents
                   // flushes.
                   short unsigned const rank =
@@ -70,10 +69,9 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
           for(int m = 2; m < l; ++m) {
             for(int n = 1; n < m; ++n) {
               for(int p = 0; p < n; ++p) {
-                int const key = face_flush[i] + face_flush[j] +
-                face_flush[k] + face_flush[l] +
-                face_flush[m] + face_flush[n] +
-                face_flush[p];
+                int const key = face_flush[i] + face_flush[j] + face_flush[k] +
+                    face_flush[l] + face_flush[m] + face_flush[n] +
+                    face_flush[p];
                 mFlushRankPtr[key] =
                   five_card_evaluator.GetRank(i<<2, j<<2, k<<2, l<<2, m<<2,
                                               n<<2, p<<2);
@@ -93,9 +91,8 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
         for (int l = 2; l < k; ++l) {
           for (int m = 1; m < l; ++m) {
             for (int n = 0; n < m; ++n) {
-              int const key = face_flush[i] + face_flush[j] +
-              face_flush[k] + face_flush[l] +
-              face_flush[m] + face_flush[n];
+              int const key = face_flush[i] + face_flush[j] + face_flush[k] +
+                  face_flush[l] + face_flush[m] + face_flush[n];
               // The Two of Clubs is the card at index 51; the other six
               // cards all have the spade suit.
               mFlushRankPtr[key] =
@@ -116,7 +113,7 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
         for (int l = 1; l < k; ++l) {
           for (int m = 0; m < l; ++m) {
             int const key = face_flush[i] + face_flush[j] + face_flush[k] +
-            face_flush[l] + face_flush[m];
+                face_flush[l] + face_flush[m];
             mFlushRankPtr[key] = five_card_evaluator.GetRank(i<<2, j<<2, k<<2,
                                                              l<<2, m<<2);
             ++count;
