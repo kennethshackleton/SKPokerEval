@@ -10,10 +10,9 @@ written in C++.
 #include "SevenEval.h"
 
 int main() {
-  SevenEval const* eval = new SevenEval();
+  SevenEval const eval;
   // Get the rank of the seven-card spade flush, ace high.
-  std::cout << eval->GetRank(0, 4, 8, 12, 16, 20, 24) << std::endl;
-  delete eval;
+  std::cout << eval.GetRank(0, 4, 8, 12, 16, 20, 24) << std::endl;
   return 0;
 }
 ```
