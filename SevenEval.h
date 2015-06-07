@@ -22,6 +22,9 @@
 
 #include "Constants.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 class SevenEval {
 public:
   SevenEval();
@@ -39,5 +42,8 @@ private:
   short unsigned mDeckcardsSuit[DECK_SIZE];
   short mFlushCheck[MAX_FLUSH_CHECK_SUM+1];
 };
+#ifdef __cplusplus
+}
+#endif
 
 #endif

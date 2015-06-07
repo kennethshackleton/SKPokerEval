@@ -22,6 +22,9 @@
 
 #include "Constants.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 class FiveEval {
 public:
   FiveEval();
@@ -43,5 +46,8 @@ private:
   short unsigned mDeckcardsFlush[DECK_SIZE];
   short unsigned mDeckcardsSuit[DECK_SIZE];
 };
+#ifdef __cplusplus
+}
+#endif
 
 #endif
