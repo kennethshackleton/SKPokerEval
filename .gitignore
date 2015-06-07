@@ -1,2 +1,18 @@
 .DS_Store
 .idea
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt
+TestTestfile.cmake
+Testing/
+TestTestfile.cmake
+CTestTestfile.cmake
+eval_tests
+
+# Artifacts
+libspecialkeval.a
+
