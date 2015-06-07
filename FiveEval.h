@@ -50,4 +50,4 @@ private:
 }
 #endif
 
-#endif
+#endif // SPECIALKEVAL_FIVEEVAL_H

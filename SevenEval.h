@@ -46,4 +46,4 @@ private:
 }
 #endif
 
-#endif
+#endif // SPECIALKEVAL_SEVENEVAL_H
