@@ -5,8 +5,7 @@ written in C++.
 
 ## Travis status
 
-![Build Status](https://travis-ci.org/kennethshackleton/SpecialKEval.svg)
-
+[![Build Status](https://travis-ci.org/kennethshackleton/SpecialKEval.svg)](https://travis-ci.org/kennethshackleton/SpecialKEval)
 ## Build instructions
 
 From the root directory of the project execute:
