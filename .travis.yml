@@ -1,0 +1,5 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+script: ./configure && make && ctest && rm eval_tests

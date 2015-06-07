@@ -17,31 +17,33 @@
 // with this program in a file in the top-level directory called "GPLv3". If
 // not, see http://www.gnu.org/licenses/.
 
-#ifndef SPECIALKEVAL_FIVEEVAL_H
-#define SPECIALKEVAL_FIVEEVAL_H
+#ifndef SPECIALKEVAL_SEVENEVAL_H
+#define SPECIALKEVAL_SEVENEVAL_H
 
 #include "Constants.h"
 
-class FiveEval {
+#ifdef __cplusplus
+extern "C" {
+#endif
+class SevenEval {
 public:
-  FiveEval();
-  ~FiveEval();
-  // Get the rank of a hand comprising five cards, each represented by an
-  // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
-  // The higher the rank the better the hand. Two hands of equal rank tie.
-  short unsigned GetRank(int const, int const, int const, int const,
-                         int const) const;
+  SevenEval();
+  ~SevenEval();
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  short unsigned GetRank(int const, int const, int const, int const,
-                         int const, const int, int const) const;
+  short unsigned GetRank(int const, int const, int const, int const, int const,
+                         int const, int const) const;
 private:
   short unsigned *mRankPtr;
   short unsigned *mFlushRankPtr;
-  int unsigned mDeckcardsFace[DECK_SIZE];
+  long unsigned mDeckcardsKey[DECK_SIZE];
   short unsigned mDeckcardsFlush[DECK_SIZE];
   short unsigned mDeckcardsSuit[DECK_SIZE];
+  short mFlushCheck[MAX_FLUSH_CHECK_SUM+1];
 };
-
+#ifdef __cplusplus
+}
 #endif
+
+#endif // SPECIALKEVAL_SEVENEVAL_H
