@@ -3,6 +3,19 @@
 SpecialKEval is a lightweight 32-bit Texas Hold'em 5- and 7-card hand evaluator 
 written in C++.
 
+## Travis status
+
+[![Build Status](https://travis-ci.org/kennethshackleton/SpecialKEval.svg)](https://travis-ci.org/kennethshackleton/SpecialKEval)
+## Build instructions
+
+From the root directory of the project execute:
+
+```
+./configure && make && ctest && rm eval_tests
+```
+
+This will build the library and run unit tests.
+
 ## Example
 
 ```
