@@ -24,20 +24,20 @@
 
 class SevenEval {
 public:
- SevenEval();
- ~SevenEval();
- // Get the rank of a hand comprising seven cards, each represented by an
- // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
- // The higher the rank the better the hand. Two hands of equal rank tie.
- short unsigned GetRank(int const, int const, int const, int const, int const,
-         int const, int const) const;
+  SevenEval();
+  ~SevenEval();
+  // Get the rank of a hand comprising seven cards, each represented by an
+  // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
+  // The higher the rank the better the hand. Two hands of equal rank tie.
+  short unsigned GetRank(int const, int const, int const, int const, int const,
+                         int const, int const) const;
 private:
- short unsigned mRankArray[CIRCUMFERENCE_SEVEN];
- short unsigned mFlushRankArray[MAX_SEVEN_FLUSH_KEY_INT+1];
- long unsigned mDeckcardsKey[DECK_SIZE];
- short unsigned mDeckcardsFlush[DECK_SIZE];
- short unsigned mDeckcardsSuit[DECK_SIZE];
- short mFlushCheck[MAX_FLUSH_CHECK_SUM+1];
+  short unsigned *mRankPtr;
+  short unsigned *mFlushRankPtr;
+  long unsigned mDeckcardsKey[DECK_SIZE];
+  short unsigned mDeckcardsFlush[DECK_SIZE];
+  short unsigned mDeckcardsSuit[DECK_SIZE];
+  short mFlushCheck[MAX_FLUSH_CHECK_SUM+1];
 };
 
 #endif
