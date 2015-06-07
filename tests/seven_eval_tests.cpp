@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "../FiveEval.h"
-#include "../SevenEval.h"
+#include "../src/FiveEval.h"
+#include "../src/SevenEval.h"
 
 TEST(SevenEval, Regression) {
   FiveEval const* five_eval = new FiveEval();
@@ -14,7 +14,15 @@ TEST(SevenEval, Regression) {
               for (int p=n+1; p<52; ++p) {
                 int const five_rank = five_eval->GetRank(i, j, k, l, m, n, p);
                 int const seven_rank = seven_eval->GetRank(i, j, k, l, m, n, p);
-                ASSERT_EQ(five_rank, seven_rank);
+                ASSERT_EQ(five_rank, seven_rank) << "Ranks at "
+                                                 << i << ", "
+                                                 << j << ", "
+                                                 << k << ", "
+                                                 << l << ", "
+                                                 << m << ", "
+                                                 << n << ", "
+                                                 << p
+                                                 << " differ.";
               }
             }
           }
