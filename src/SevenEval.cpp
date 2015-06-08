@@ -47,13 +47,12 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
             for (int n = 0; n <= m; ++n) {
               int const N = (n<<2) + 1;
               for (int p = 0; p <= n; ++p) {
-                int const P = (p<<2) + 1;
                 if (i != m && j != n && k != p) {
                   int const key = face[i] + face[j] + face[k] + face[l] +
                       face[m] + face[n] + face[p];
                   // The (4*i)+0 and (4*m)+1 trick prevents flushes.
                   short unsigned const rank =
-                    five_card_evaluator.GetRank(I, J, K, L, M, N, P);
+                    five_card_evaluator.GetRank(I, J, K, L, M, N, (p<<2) + 1);
                   mRankPtr[key < CIRCUMFERENCE_SEVEN ?
                            key : key - CIRCUMFERENCE_SEVEN] = rank;
                   ++count;
