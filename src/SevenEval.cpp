@@ -35,20 +35,25 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   
   // Non-flush ranks.
   for (int i = 1; i < 13; ++i) {
+    int const I = i<<2;
     for (int j = 1; j <= i; ++j) {
+      int const J = j<<2;
       for (int k = 1; k <= j; ++k) {
+        int const K = k<<2;
         for (int l = 0; l <= k; ++l) {
+          int const L = l<<2;
           for (int m = 0; m <= l; ++m) {
+            int const M = (m<<2) + 1;
             for (int n = 0; n <= m; ++n) {
+              int const N = (n<<2) + 1;
               for (int p = 0; p <= n; ++p) {
+                int const P = (p<<2) + 1;
                 if (i != m && j != n && k != p) {
                   int const key = face[i] + face[j] + face[k] + face[l] +
                       face[m] + face[n] + face[p];
-                  // The (4*i)+0 and (4*m)+1 trick prevents
-                  // flushes.
+                  // The (4*i)+0 and (4*m)+1 trick prevents flushes.
                   short unsigned const rank =
-                  five_card_evaluator.GetRank(i<<2, j<<2, k<<2, l<<2, (m<<2)+1,
-                                              (n<<2)+1, (p<<2)+1);
+                    five_card_evaluator.GetRank(I, J, K, L, M, N, P);
                   mRankPtr[key < CIRCUMFERENCE_SEVEN ?
                            key : key - CIRCUMFERENCE_SEVEN] = rank;
                   ++count;
@@ -63,18 +68,23 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   
   // Flush ranks, all seven of the same suit.
   for (int i = 6; i < 13; ++i) {
+    int const I = i<<2;
     for (int j = 5; j < i; ++j) {
+      int const J = j<<2;
       for(int k = 4; k < j; ++k) {
+        int const K = k<<2;
         for(int l = 3; l < k; ++l) {
+          int const L = l<<2;
           for(int m = 2; m < l; ++m) {
+            int const M = m<<2;
             for(int n = 1; n < m; ++n) {
+              int const N = n<<2;
               for(int p = 0; p < n; ++p) {
                 int const key = face_flush[i] + face_flush[j] + face_flush[k] +
                     face_flush[l] + face_flush[m] + face_flush[n] +
                     face_flush[p];
                 mFlushRankPtr[key] =
-                  five_card_evaluator.GetRank(i<<2, j<<2, k<<2, l<<2, m<<2,
-                                              n<<2, p<<2);
+                  five_card_evaluator.GetRank(I, J, K, L, M, N, p<<2);
                 ++count;
               }
             }
@@ -86,18 +96,22 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   
   // Only six cards of the same suit.
   for (int i = 5; i < 13; ++i) {
+    int const I = i<<2;
     for (int j = 4; j < i; ++j) {
+      int const J = j<<2;
       for (int k = 3; k < j; ++k) {
+        int const K = k<<2;
         for (int l = 2; l < k; ++l) {
+          int const L = l<<2;
           for (int m = 1; m < l; ++m) {
+            int const M = m<<2;
             for (int n = 0; n < m; ++n) {
               int const key = face_flush[i] + face_flush[j] + face_flush[k] +
                   face_flush[l] + face_flush[m] + face_flush[n];
-              // The Two of Clubs is the card at index 51; the other six
-              // cards all have the spade suit.
+              // The Two of Clubs is the card at index 51; the other six cards
+              // all have the spade suit.
               mFlushRankPtr[key] =
-              five_card_evaluator.GetRank(i<<2, j<<2, k<<2, l<<2, m<<2, n<<2,
-                                          51);
+              five_card_evaluator.GetRank(I, J, K, L, M, n<<2, 51);
               ++count;
             }
           }
@@ -108,14 +122,17 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   
   // Only five cards of one suit.
   for (int i = 4; i < 13; ++i) {
+    int const I = i<<2;
     for (int j = 3; j < i; ++j) {
+      int const J = j<<2;
       for (int k = 2; k < j; ++k) {
+        int const K = k<<2;
         for (int l = 1; l < k; ++l) {
+          int const L = l<<2;
           for (int m = 0; m < l; ++m) {
             int const key = face_flush[i] + face_flush[j] + face_flush[k] +
                 face_flush[l] + face_flush[m];
-            mFlushRankPtr[key] = five_card_evaluator.GetRank(i<<2, j<<2, k<<2,
-                                                             l<<2, m<<2);
+            mFlushRankPtr[key] = five_card_evaluator.GetRank(I, J, K, L, m<<2);
             ++count;
           }
         }
@@ -150,17 +167,16 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
                   do {
                     ++flush_suit_index;
                     suit_count = (suits[i] == suits[flush_suit_index]) +
-                    (suits[j] == suits[flush_suit_index]) +
-                    (suits[k] == suits[flush_suit_index]) +
-                    (suits[l] == suits[flush_suit_index]) +
-                    (suits[m] == suits[flush_suit_index]) +
-                    (suits[n] == suits[flush_suit_index]) +
-                    (suits[p] == suits[flush_suit_index]);
+                      (suits[j] == suits[flush_suit_index]) +
+                      (suits[k] == suits[flush_suit_index]) +
+                      (suits[l] == suits[flush_suit_index]) +
+                      (suits[m] == suits[flush_suit_index]) +
+                      (suits[n] == suits[flush_suit_index]) +
+                      (suits[p] == suits[flush_suit_index]);
                     cards_matched_so_far += suit_count;
                   } while (cards_matched_so_far < 3 && flush_suit_index < 4);
-                  // A count of 5 or more means we have a
-                  // flush. We place the value of the flush
-                  // suit here.
+                  // A count of 5 or more means we have a flush. We place the
+                  // value of the flush suit here.
                   if (suit_count > 4) {
                     mFlushCheck[suit_key] = suits[flush_suit_index];
                   } else {

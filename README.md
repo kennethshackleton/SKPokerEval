@@ -11,7 +11,7 @@ written in C++.
 From the root directory of the project execute:
 
 ```
-./configure && make && ctest && rm eval_tests
+./configure && make && ctest
 ```
 
 This will build the library and run unit tests.
