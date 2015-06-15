@@ -2,5 +2,5 @@ language: cpp
 compiler:
   - gcc
   - clang
-script: ./configure && make && ctest
+script: ./configure && cmake . && make && ctest
 
