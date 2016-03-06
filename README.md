@@ -1,11 +1,12 @@
-# SpecialKEval
+# SKPokerEval
 
-SpecialKEval is a lightweight 32-bit Texas Hold'em 5- and 7-card hand evaluator 
+SKPokerEval is a lightweight 32-bit Texas Hold'em 5- and 7-card hand evaluator 
 written in C++.
 
 ## Travis status
 
-[![Build Status](https://travis-ci.org/kennethshackleton/SpecialKEval.svg)](https://travis-ci.org/kennethshackleton/SpecialKEval)
+[![Build Status](https://travis-ci.org/kennethshackleton/SKPokerEval.svg)](https://travis-ci.org/kennethshackleton/SKPokerEval)
+
 ## Build instructions
 
 From the root directory of the project execute:
