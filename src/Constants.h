@@ -1,4 +1,4 @@
-// SpecialKEval
+// SKPokerEval
 //
 // Copyright 2010 Kenneth J. Shackleton
 //
@@ -17,8 +17,8 @@
 // with this program in a file in the top-level directory called "GPLv3". If
 // not, see http://www.gnu.org/licenses/.
 
-#ifndef SPECIALKEVAL_CONSTANTS_H_
-#define SPECIALKEVAL_CONSTANTS_H_
+#ifndef SKPOKEREVAL_CONSTANTS_H_
+#define SKPOKEREVAL_CONSTANTS_H_
 
 #define DECK_SIZE 52
 
@@ -98,4 +98,4 @@
 #define SUIT_BIT_MASK 511
 #define NON_FLUSH_BIT_SHIFT 9
 
-#endif
+#endif // SKPOKEREVAL_CONSTANTS_H_
