@@ -160,12 +160,12 @@ short unsigned FiveEval::GetRank(int const card_one, int const card_two,
                   mDeckcardsFace[card_five]];
 }
 
-short unsigned FiveEval::GetRank(int const card_one, const int card_two,
-                                 const int card_three, const int card_four,
-                                 const int card_five, const int card_six,
-                                 const int card_seven) const {
-  int seven_cards[7] = {card_one, card_two, card_three, card_four, card_five,
-    card_six, card_seven};
+short unsigned FiveEval::GetRank(int const card_one, int const card_two,
+                                 int const card_three, int const card_four,
+                                 int const card_five, int const card_six,
+                                 int const card_seven) const {
+  int const seven_cards[7] = {card_one, card_two, card_three, card_four,
+    card_five, card_six, card_seven};
   int temp[5];
   
   short unsigned best_rank_so_far = 0, current_rank = 0;

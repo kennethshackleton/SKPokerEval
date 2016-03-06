@@ -1,4 +1,4 @@
-// SpecialKEval
+// SKPokerEval
 //
 // Copyright 2010 Kenneth J. Shackleton
 //
@@ -17,8 +17,8 @@
 // with this program in a file in the top-level directory called "GPLv3". If
 // not, see http://www.gnu.org/licenses/.
 
-#ifndef SPECIALKEVAL_SEVENEVAL_H
-#define SPECIALKEVAL_SEVENEVAL_H
+#ifndef SKPOKEREVAL_SEVENEVAL_H
+#define SKPOKEREVAL_SEVENEVAL_H
 
 #include "Constants.h"
 
@@ -40,4 +40,4 @@ private:
   short mFlushCheck[MAX_FLUSH_CHECK_SUM+1];
 };
 
-#endif // SPECIALKEVAL_SEVENEVAL_H
+#endif // SKPOKEREVAL_SEVENEVAL_H
