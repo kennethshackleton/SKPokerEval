@@ -155,18 +155,17 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
                 flush_suit_index = -1;
                 cards_matched_so_far = 0;
                 suit_key = suits[i] + suits[j] + suits[k] +
-                suits[l] + suits[m] + suits[n] +
-                suits[p];
+                    suits[l] + suits[m] + suits[n] + suits[p];
                 if (UNVERIFIED == mFlushCheck[suit_key]) {
                   do {
                     ++flush_suit_index;
                     suit_count = (suits[i] == suits[flush_suit_index]) +
-                      (suits[j] == suits[flush_suit_index]) +
-                      (suits[k] == suits[flush_suit_index]) +
-                      (suits[l] == suits[flush_suit_index]) +
-                      (suits[m] == suits[flush_suit_index]) +
-                      (suits[n] == suits[flush_suit_index]) +
-                      (suits[p] == suits[flush_suit_index]);
+                        (suits[j] == suits[flush_suit_index]) +
+                        (suits[k] == suits[flush_suit_index]) +
+                        (suits[l] == suits[flush_suit_index]) +
+                        (suits[m] == suits[flush_suit_index]) +
+                        (suits[n] == suits[flush_suit_index]) +
+                        (suits[p] == suits[flush_suit_index]);
                     cards_matched_so_far += suit_count;
                   } while (cards_matched_so_far < 3 && flush_suit_index < 4);
                   // A count of 5 or more means we have a flush. We place the
@@ -197,7 +196,7 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
                                   int const p) const {
   // Create a 7-card hand key by adding up each of the card keys.
   long unsigned key = mDeckcardsKey[i] + mDeckcardsKey[j] + mDeckcardsKey[k] +
-  mDeckcardsKey[l] + mDeckcardsKey[m] + mDeckcardsKey[n] + mDeckcardsKey[p];
+    mDeckcardsKey[l] + mDeckcardsKey[m] + mDeckcardsKey[n] + mDeckcardsKey[p];
   // Tear off the flush check strip.
   int const flush_check_key = (const int) (key & SUIT_BIT_MASK);
   short flush_suit = mFlushCheck[flush_check_key];
