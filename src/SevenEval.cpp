@@ -105,7 +105,7 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
               // The Two of Clubs is the card at index 51; the other six cards
               // all have the spade suit.
               mFlushRankPtr[key] =
-              five_card_evaluator.GetRank(I, J, K, L, M, n<<2, 51);
+                five_card_evaluator.GetRank(I, J, K, L, M, n<<2, 51);
               ++count;
             }
           }
