@@ -1,4 +1,4 @@
-// SpecialKEval
+// SKPokerEval
 //
 // Copyright 2010 Kenneth J. Shackleton
 //
@@ -17,8 +17,8 @@
 // with this program in a file in the top-level directory called "GPLv3". If
 // not, see http://www.gnu.org/licenses/.
 
-#ifndef SPECIALKEVAL_FIVEEVAL_H
-#define SPECIALKEVAL_FIVEEVAL_H
+#ifndef SKPOKEREVAL_FIVEEVAL_H
+#define SKPOKEREVAL_FIVEEVAL_H
 
 #include "Constants.h"
 
@@ -44,4 +44,4 @@ private:
   short unsigned mDeckcardsSuit[DECK_SIZE];
 };
 
-#endif // SPECIALKEVAL_FIVEEVAL_H
+#endif // SKPOKEREVAL_FIVEEVAL_H
