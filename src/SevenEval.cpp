@@ -8,7 +8,6 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   int const face_flush[13] = {ACE_FLUSH, KING_FLUSH, QUEEN_FLUSH, JACK_FLUSH,
     TEN_FLUSH, NINE_FLUSH, EIGHT_FLUSH, SEVEN_FLUSH, SIX_FLUSH, FIVE_FLUSH,
     FOUR_FLUSH, THREE_FLUSH, TWO_FLUSH};
-  
   for (int n = 0; n < 13; n++) {
     int const N = n<<2;
     long unsigned const start = face[n] << NON_FLUSH_BIT_SHIFT;
