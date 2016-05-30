@@ -136,8 +136,8 @@ mFlushRankPtr(new short unsigned[MAX_FIVE_FLUSH_KEY_INT+1]) {
 }
 
 FiveEval::~FiveEval() {
-  delete mRankPtr;
-  delete mFlushRankPtr;
+  delete[] mRankPtr;
+  delete[] mFlushRankPtr;
 }
 
 short unsigned FiveEval::GetRank(int const card_one, int const card_two,

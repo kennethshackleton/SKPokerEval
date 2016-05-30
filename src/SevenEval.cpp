@@ -187,8 +187,8 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
 }
 
 SevenEval::~SevenEval() {
-  delete mRankPtr;
-  delete mFlushRankPtr;
+  delete[] mRankPtr;
+  delete[] mFlushRankPtr;
 }
 
 short unsigned SevenEval::GetRank(int const i, int const j, int const k,
