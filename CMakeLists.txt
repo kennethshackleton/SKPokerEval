@@ -21,6 +21,6 @@ enable_testing()
 add_subdirectory(lib/gtest-1.7.0)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-add_executable(eval_tests tests/seven_eval_tests.cpp tests/five_eval_tests.cpp)
+add_executable(eval_tests tests/five_eval_tests.cpp tests/seven_eval_tests.cpp)
 target_link_libraries(eval_tests gtest_main skpokereval)
 add_test(NAME GTests COMMAND eval_tests)

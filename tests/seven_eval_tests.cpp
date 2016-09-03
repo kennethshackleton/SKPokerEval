@@ -2,9 +2,17 @@
 #include "../src/FiveEval.h"
 #include "../src/SevenEval.h"
 
-TEST(SevenEval, Regression) {
+class SevenEvalTest : public ::testing::Test {
+protected:
+  virtual void SetUp() {}
+
+  virtual void TearDown() {}
+
   FiveEval const five_eval;
   SevenEval const seven_eval;
+};
+
+TEST_F(SevenEvalTest, Regression) {
   for (int i=0; i<46; ++i) {
     for (int j=i+1; j<47; ++j) {
       for (int k=j+1; k<48; ++k) {
@@ -31,3 +39,4 @@ TEST(SevenEval, Regression) {
     }
   }
 }
+
