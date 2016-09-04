@@ -291,7 +291,7 @@ TEST_F(FiveEvalTest, StraightFlush) {
   }
 }
 
-TEST_F(FiveEvalTest, SevenByFive) {
+TEST_F(FiveEvalTest, SevenCardHand) {
   int five[5];
   int seven[7];
   for (int i = 6; i < 51; ++i) {
