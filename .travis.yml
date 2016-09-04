@@ -15,5 +15,5 @@ install:
       sudo apt-get install cmake;
     fi
 
-script: ./build
+script: ./build.sh
 
