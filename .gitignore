@@ -16,4 +16,5 @@ eval_tests
 # Artifacts
 libskpokereval.a
 lib
+SKConfig.h
 
