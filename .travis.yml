@@ -1,6 +1,19 @@
-language: cpp
+os:
+  - linux
+
+sudo: required
+dist: trusty
+
 compiler:
   - gcc
   - clang
-script: ./configure && cmake . && make && ctest
+
+language: cpp
+
+install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      sudo apt-get install cmake;
+    fi
+
+script: ./build
 
