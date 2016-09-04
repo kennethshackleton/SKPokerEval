@@ -197,8 +197,7 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
   long unsigned key = mDeckcardsKey[i] + mDeckcardsKey[j] + mDeckcardsKey[k] +
     mDeckcardsKey[l] + mDeckcardsKey[m] + mDeckcardsKey[n] + mDeckcardsKey[p];
   // Tear off the flush check strip.
-  int const flush_check_key = (const int) (key & SUIT_BIT_MASK);
-  short flush_suit = mFlushCheck[flush_check_key];
+  short flush_suit = mFlushCheck[key & SUIT_BIT_MASK];
   if (flush_suit == NOT_A_FLUSH) {
     // Tear off the non-flush key strip, and look up the rank.
     key = (key >> NON_FLUSH_BIT_SHIFT);
