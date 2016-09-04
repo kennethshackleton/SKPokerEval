@@ -203,7 +203,7 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
   int_fast16_t const flush_suit = mFlushCheck[key & SUIT_BIT_MASK];
   if (flush_suit == NOT_A_FLUSH) {
     // Tear off the non-flush key strip, and look up the rank.
-    key = (key >> NON_FLUSH_BIT_SHIFT);
+    key >>= NON_FLUSH_BIT_SHIFT;
     // Take key modulo the circumference.
     return mRankPtr[(key < CIRCUMFERENCE_SEVEN ? key :
                      key - CIRCUMFERENCE_SEVEN)];
