@@ -18,14 +18,22 @@ execute_process(
 
 configure_file (
   "${PROJECT_SOURCE_DIR}/src/SKConfig.h.in"
-  "${PROJECT_BINARY_DIR}/src/SKConfig.h"
+  "${PROJECT_BINARY_DIR}/generated/SKConfig.h"
 )
+
+# Includes.
+include_directories("${PROJECT_SOURCE_DIR}/generated")
+
+# Output directories.
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 
 set(CMAKE_CXX_FLAGS "-g -Wall")
 set(CMAKE_CXX_STANDARD 11)
 
 # Build
-add_library(skpokereval src/FiveEval.cpp src/SevenEval.cpp)
+add_subdirectory(src)
 
 # Testing
 enable_testing()
