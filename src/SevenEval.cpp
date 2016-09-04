@@ -189,8 +189,7 @@ SevenEval::~SevenEval() {
 }
 
 short unsigned SevenEval::GetRank(int const i, int const j, int const k,
-                                  int const l, int const m, int const n,
-                                  int const p) const {
+    int const l, int const m, int const n, int const p) const {
   // Create a 7-card hand key by adding up each of the card keys.
   uint_fast32_t key = mDeckcardsKey[i] + mDeckcardsKey[j] + mDeckcardsKey[k] +
     mDeckcardsKey[l] + mDeckcardsKey[m] + mDeckcardsKey[n] + mDeckcardsKey[p];
