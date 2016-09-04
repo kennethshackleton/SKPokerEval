@@ -32,22 +32,34 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   
   // Non-flush ranks.
   for (int i = 1; i < 13; ++i) {
+    int const I = i<<2;
     for (int j = 1; j <= i; ++j) {
+      int const J = j<<2;
       for (int k = 1; k <= j; ++k) {
+        int const K = k<<2;
         for (int l = 0; l <= k; ++l) {
+          int const L = l<<2;
           for (int m = 0; m <= l; ++m) {
+            if (i == m) {
+              break;
+            }
+            int const M = (m<<2)+1;
             for (int n = 0; n <= m; ++n) {
+              if (j == n) {
+                break;
+              }
+              int const N = (n<<2)+1;
               for (int p = 0; p <= n; ++p) {
-                if (i != m && j != n && k != p) {
-                  int const key = face[i] + face[j] + face[k] + face[l] +
-                      face[m] + face[n] + face[p];
-                  // The (4*i)+0 and (4*m)+1 trick prevents flushes.
-                  short unsigned const rank =
-                    eval.GetRank(i<<2, j<<2, k<<2, l<<2, (m<<2)+1, (n<<2)+1,
-                      (p<<2)+1);
-                  mRankPtr[key < CIRCUMFERENCE_SEVEN ?
-                           key : key - CIRCUMFERENCE_SEVEN] = rank;
+                if (k == p) {
+                  break;
                 }
+                int const P = (p<<2)+1;
+                int const key = face[i] + face[j] + face[k] + face[l] +
+                  face[m] + face[n] + face[p];
+                // The (4*i)+0 and (4*m)+1 trick prevents flushes.
+                short unsigned const rank = eval.GetRank(I, J, K, L, M, N, P);
+                mRankPtr[key < CIRCUMFERENCE_SEVEN ?
+                  key : key - CIRCUMFERENCE_SEVEN] = rank;
               }
             }
           }
