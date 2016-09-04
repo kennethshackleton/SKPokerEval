@@ -13,6 +13,7 @@ language: cpp
 install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       sudo apt-get install cmake;
+      cmake --version;
     fi
 
 script: ./build.sh
