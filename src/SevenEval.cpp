@@ -8,20 +8,20 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   int const face_flush[13] = {ACE_FLUSH, KING_FLUSH, QUEEN_FLUSH, JACK_FLUSH,
     TEN_FLUSH, NINE_FLUSH, EIGHT_FLUSH, SEVEN_FLUSH, SIX_FLUSH, FIVE_FLUSH,
     FOUR_FLUSH, THREE_FLUSH, TWO_FLUSH};
-  for (int n = 0; n < 13; n++) {
+  for (int n = 0; n < 13; ++n) {
     int const N = n<<2;
-    long unsigned const start = face[n] << NON_FLUSH_BIT_SHIFT;
-    mDeckcardsKey[N] = start + SPADE;
+    int unsigned const start = face[n] << NON_FLUSH_BIT_SHIFT;
+    mDeckcardsKey[N  ] = start + SPADE;
     mDeckcardsKey[N+1] = start + HEART;
     mDeckcardsKey[N+2] = start + DIAMOND;
     mDeckcardsKey[N+3] = start + CLUB;
     
-    mDeckcardsFlush[N] = (short unsigned) face_flush[n];
-    mDeckcardsFlush[N+1] = (short unsigned) face_flush[n];
-    mDeckcardsFlush[N+2] = (short unsigned) face_flush[n];
-    mDeckcardsFlush[N+3] = (short unsigned) face_flush[n];
+    mDeckcardsFlush[N  ] = face_flush[n];
+    mDeckcardsFlush[N+1] = face_flush[n];
+    mDeckcardsFlush[N+2] = face_flush[n];
+    mDeckcardsFlush[N+3] = face_flush[n];
     
-    mDeckcardsSuit[N] = SPADE;
+    mDeckcardsSuit[N  ] = SPADE;
     mDeckcardsSuit[N+1] = HEART;
     mDeckcardsSuit[N+2] = DIAMOND;
     mDeckcardsSuit[N+3] = CLUB;
@@ -30,7 +30,7 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   int count = 0;
   
   // Generate seven-ranks from five-ranks.
-  FiveEval five_card_evaluator;
+  FiveEval const eval;
   
   // Non-flush ranks.
   for (int i = 1; i < 13; ++i) {
@@ -45,8 +45,8 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
                       face[m] + face[n] + face[p];
                   // The (4*i)+0 and (4*m)+1 trick prevents flushes.
                   short unsigned const rank =
-                    five_card_evaluator.GetRank(i<<2, j<<2, k<<2, l<<2,
-                                                (m<<2)+1, (n<<2)+1, (p<<2)+1);
+                    eval.GetRank(i<<2, j<<2, k<<2, l<<2, (m<<2)+1, (n<<2)+1,
+                      (p<<2)+1);
                   mRankPtr[key < CIRCUMFERENCE_SEVEN ?
                            key : key - CIRCUMFERENCE_SEVEN] = rank;
                   ++count;
@@ -76,8 +76,7 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
                 int const key = face_flush[i] + face_flush[j] + face_flush[k] +
                     face_flush[l] + face_flush[m] + face_flush[n] +
                     face_flush[p];
-                mFlushRankPtr[key] =
-                  five_card_evaluator.GetRank(I, J, K, L, M, N, p<<2);
+                mFlushRankPtr[key] = eval.GetRank(I, J, K, L, M, N, p<<2);
                 ++count;
               }
             }
@@ -103,8 +102,7 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
                   face_flush[l] + face_flush[m] + face_flush[n];
               // The Two of Clubs is the card at index 51; the other six cards
               // all have the spade suit.
-              mFlushRankPtr[key] =
-                five_card_evaluator.GetRank(I, J, K, L, M, n<<2, 51);
+              mFlushRankPtr[key] = eval.GetRank(I, J, K, L, M, n<<2, 51);
               ++count;
             }
           }
@@ -125,7 +123,7 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
           for (int m = 0; m < l; ++m) {
             int const key = face_flush[i] + face_flush[j] + face_flush[k] +
                 face_flush[l] + face_flush[m];
-            mFlushRankPtr[key] = five_card_evaluator.GetRank(I, J, K, L, m<<2);
+            mFlushRankPtr[key] = eval.GetRank(I, J, K, L, m<<2);
             ++count;
           }
         }
@@ -216,3 +214,4 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
     (mDeckcardsSuit[p] == flush_suit ? mDeckcardsFlush[p] : 0);
   return mFlushRankPtr[flush_key];
 }
+
