@@ -39,27 +39,18 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
         int const K = k<<2;
         for (int l = 0; l <= k; ++l) {
           int const L = l<<2;
-          for (int m = 0; m <= l; ++m) {
-            if (i == m) {
-              break;
-            }
+          for (int m = 0; m <= l && m < i; ++m) {
             int const M = (m<<2)+1;
-            for (int n = 0; n <= m; ++n) {
-              if (j == n) {
-                break;
-              }
+            for (int n = 0; n <= m && n < j; ++n) {
               int const N = (n<<2)+1;
-              for (int p = 0; p <= n; ++p) {
-                if (k == p) {
-                  break;
-                }
+              for (int p = 0; p <= n && p < k; ++p) {
                 int const P = (p<<2)+1;
                 int const key = face[i] + face[j] + face[k] + face[l] +
-                  face[m] + face[n] + face[p];
+                    face[m] + face[n] + face[p];
                 // The (4*i)+0 and (4*m)+1 trick prevents flushes.
                 short unsigned const rank = eval.GetRank(I, J, K, L, M, N, P);
                 mRankPtr[key < CIRCUMFERENCE_SEVEN ?
-                  key : key - CIRCUMFERENCE_SEVEN] = rank;
+                    key : key - CIRCUMFERENCE_SEVEN] = rank;
               }
             }
           }
@@ -73,15 +64,15 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
     int const I = i<<2;
     for (int j = 5; j < i; ++j) {
       int const J = j<<2;
-      for(int k = 4; k < j; ++k) {
+      for (int k = 4; k < j; ++k) {
         int const K = k<<2;
-        for(int l = 3; l < k; ++l) {
+        for (int l = 3; l < k; ++l) {
           int const L = l<<2;
-          for(int m = 2; m < l; ++m) {
+          for (int m = 2; m < l; ++m) {
             int const M = m<<2;
-            for(int n = 1; n < m; ++n) {
+            for (int n = 1; n < m; ++n) {
               int const N = n<<2;
-              for(int p = 0; p < n; ++p) {
+              for (int p = 0; p < n; ++p) {
                 int const key = face_flush[i] + face_flush[j] + face_flush[k] +
                     face_flush[l] + face_flush[m] + face_flush[n] +
                     face_flush[p];
