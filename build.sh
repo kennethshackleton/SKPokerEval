@@ -1,0 +1,2 @@
+./configure && cmake . && make && ctest
+
