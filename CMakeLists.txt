@@ -11,7 +11,7 @@ configure_file (
   "${PROJECT_BINARY_DIR}/src/SKConfig.h"
 )
 
-set(CMAKE_CXX_FLAGS "-g -Wall")
+set(CMAKE_CXX_FLAGS "-g -Wall --std=c++11")
 
 # Build
 add_library(skpokereval src/FiveEval.cpp src/SevenEval.cpp)

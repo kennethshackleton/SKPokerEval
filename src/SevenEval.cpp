@@ -192,10 +192,10 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
                                   int const l, int const m, int const n,
                                   int const p) const {
   // Create a 7-card hand key by adding up each of the card keys.
-  int unsigned key = mDeckcardsKey[i] + mDeckcardsKey[j] + mDeckcardsKey[k] +
+  uint_fast32_t key = mDeckcardsKey[i] + mDeckcardsKey[j] + mDeckcardsKey[k] +
     mDeckcardsKey[l] + mDeckcardsKey[m] + mDeckcardsKey[n] + mDeckcardsKey[p];
   // Tear off the flush check strip.
-  short const flush_suit = mFlushCheck[key & SUIT_BIT_MASK];
+  int_fast16_t const flush_suit = mFlushCheck[key & SUIT_BIT_MASK];
   if (flush_suit == NOT_A_FLUSH) {
     // Tear off the non-flush key strip, and look up the rank.
     key = (key >> NON_FLUSH_BIT_SHIFT);
