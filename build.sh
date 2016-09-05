@@ -1,3 +1,3 @@
 #!/bin/sh
-./configure && cmake . && make && ctest
+./configure && cmake . && make && ctest --verbose
 

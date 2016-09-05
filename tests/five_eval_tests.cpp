@@ -291,3 +291,55 @@ TEST_F(FiveEvalTest, StraightFlush) {
   }
 }
 
+TEST_F(FiveEvalTest, SevenCardHand) {
+  int five[5];
+  int seven[7];
+  for (int i = 6; i < 51; ++i) {
+    seven[0] = i;
+    for (int j = 5; j < i; ++j) {
+      seven[1] = j;
+      for (int k = 4; k < j; ++k) {
+        seven[2] = k;
+        for (int l = 3; l < k; ++l) {
+          seven[3] = l;
+          for (int m = 2; m < l; ++m) {
+            seven[4] = m;
+            for (int n = 1; n < m; ++n) {
+              seven[5] = n;
+              for (int p = 0; p < n; ++p) {
+                seven[6] = p;
+                short unsigned rbf = 0;
+                int v = 0;
+                for (int x = 1; x < 7; ++x) {
+                  for (int y = 0; y < x; ++y) {
+                    v = 0;
+                    for (int z = 0; z < 7; ++z) {
+                      if (z != x && z != y) {
+                        five[v++] = seven[z];
+                      }
+                    }
+                    short unsigned const rank = eval.GetRank(five[0], five[1],
+                        five[2], five[3], five[4]);
+                    if (rbf < rank) {
+                      rbf = rank;
+                    }
+                  }
+                }
+                short const rbs = eval.GetRank(i, j, k, l, m, n, p);
+                ASSERT_EQ(rbf, rbs) << "Rank " << rbs << " at "
+                                    << i << ", "
+                                    << j << ", "
+                                    << k << ", "
+                                    << l << ", "
+                                    << m << ", "
+                                    << n << ", "
+                                    << p << " is invalid.";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
