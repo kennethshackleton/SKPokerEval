@@ -1,5 +1,6 @@
 #include "SevenEval.h"
 #include "FiveEval.h"
+#include <cstring>
 
 SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
     mFlushRankPtr(new short unsigned[MAX_SEVEN_FLUSH_KEY_INT+1]) {
@@ -132,12 +133,11 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   short suit_count = 0, flush_suit_index = -1, cards_matched_so_far = 0;
   short suit_key = SPADE;
   short const suits[4] = {SPADE, HEART, DIAMOND, CLUB};
-  
-  // Initialise all entries of mFlushCheck[] to UNVERIFIED, as yet unchecked.
-  for (int i = 0 ; i < MAX_FLUSH_CHECK_SUM+1; ++i) {
-    mFlushCheck[i] = UNVERIFIED;
-  }
-  
+
+  // Initialise all entries of mFlushCheck to UNVERIFIED, as yet unchecked.
+  memset(mFlushCheck, UNVERIFIED,
+      sizeof(mFlushCheck[0]) * (MAX_FLUSH_CHECK_SUM+1));
+
   // Seven-card flush.
   for (int i = 0; i < NUMBER_OF_SUITS; ++i) {
     for (int j = 0; j <= i; ++j) {
