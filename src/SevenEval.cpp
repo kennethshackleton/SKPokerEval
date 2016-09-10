@@ -200,14 +200,14 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
                      key - CIRCUMFERENCE_SEVEN)];
   }
   // Generate a flush key, and look up the rank.
-  int const flush_key =
-    (mDeckcardsSuit[i] == flush_suit ? mDeckcardsFlush[i] : 0) +
-    (mDeckcardsSuit[j] == flush_suit ? mDeckcardsFlush[j] : 0) +
-    (mDeckcardsSuit[k] == flush_suit ? mDeckcardsFlush[k] : 0) +
-    (mDeckcardsSuit[l] == flush_suit ? mDeckcardsFlush[l] : 0) +
-    (mDeckcardsSuit[m] == flush_suit ? mDeckcardsFlush[m] : 0) +
-    (mDeckcardsSuit[n] == flush_suit ? mDeckcardsFlush[n] : 0) +
-    (mDeckcardsSuit[p] == flush_suit ? mDeckcardsFlush[p] : 0);
+  int flush_key = 0;
+  if (mDeckcardsSuit[i] == flush_suit) flush_key += mDeckcardsFlush[i];
+  if (mDeckcardsSuit[j] == flush_suit) flush_key += mDeckcardsFlush[j];
+  if (mDeckcardsSuit[k] == flush_suit) flush_key += mDeckcardsFlush[k];
+  if (mDeckcardsSuit[l] == flush_suit) flush_key += mDeckcardsFlush[l];
+  if (mDeckcardsSuit[m] == flush_suit) flush_key += mDeckcardsFlush[m];
+  if (mDeckcardsSuit[n] == flush_suit) flush_key += mDeckcardsFlush[n];
+  if (mDeckcardsSuit[p] == flush_suit) flush_key += mDeckcardsFlush[p];
   return mFlushRankPtr[flush_key];
 }
 
