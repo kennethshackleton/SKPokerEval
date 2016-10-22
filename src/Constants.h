@@ -91,8 +91,8 @@
 #define CIRCUMFERENCE_SEVEN 4565145
 
 // Used in flush checking. These must be distinct from each of the suits.
-#define UNVERIFIED -2
-#define NOT_A_FLUSH -1
+#define UNVERIFIED -1
+#define NOT_A_FLUSH -2
 
 // Bit masks
 #define SUIT_BIT_MASK 511

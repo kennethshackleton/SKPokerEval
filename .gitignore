@@ -14,5 +14,8 @@ CTestTestfile.cmake
 eval_tests
 
 # Artifacts
-libspecialkeval.a
+build/
+libskpokereval.a
+lib
+SKConfig.h
 

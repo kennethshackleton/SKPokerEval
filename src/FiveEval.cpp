@@ -187,3 +187,4 @@ short unsigned FiveEval::GetRank(int const card_one, int const card_two,
   }
   return best_rank_so_far;
 }
+

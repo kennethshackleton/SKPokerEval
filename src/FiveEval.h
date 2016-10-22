@@ -29,13 +29,11 @@ public:
   // Get the rank of a hand comprising five cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  short unsigned GetRank(int const, int const, int const, int const,
-                         int const) const;
+  short unsigned GetRank(int, int, int, int, int) const;
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  short unsigned GetRank(int const, int const, int const, int const,
-                         int const, const int, int const) const;
+  short unsigned GetRank(int, int, int, int, int, int, int) const;
 private:
   short unsigned *mRankPtr;
   short unsigned *mFlushRankPtr;

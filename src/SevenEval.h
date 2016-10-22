@@ -20,6 +20,7 @@
 #ifndef SKPOKEREVAL_SEVENEVAL_H
 #define SKPOKEREVAL_SEVENEVAL_H
 
+#include <cstdint>
 #include "Constants.h"
 
 class SevenEval {
@@ -29,15 +30,14 @@ public:
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  short unsigned GetRank(int const, int const, int const, int const, int const,
-                         int const, int const) const;
+  short unsigned GetRank(int, int, int, int, int, int, int) const;
 private:
-  short unsigned *mRankPtr;
-  short unsigned *mFlushRankPtr;
-  long unsigned mDeckcardsKey[DECK_SIZE];
-  short unsigned mDeckcardsFlush[DECK_SIZE];
-  short unsigned mDeckcardsSuit[DECK_SIZE];
-  short mFlushCheck[MAX_FLUSH_CHECK_SUM+1];
+  uint16_t *mRankPtr;
+  uint16_t *mFlushRankPtr;
+  uint32_t mDeckcardsKey[DECK_SIZE];
+  uint16_t mDeckcardsFlush[DECK_SIZE];
+  uint16_t mDeckcardsSuit[DECK_SIZE];
+  int16_t mFlushCheck[MAX_FLUSH_CHECK_SUM+1];
 };
 
 #endif // SKPOKEREVAL_SEVENEVAL_H
