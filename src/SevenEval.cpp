@@ -201,7 +201,7 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
   }
   // Generate a flush key, and look up the rank.
   int flush_key = 0;
-  if (mDeckcardsSuit[i] == flush_suit) flush_key += mDeckcardsFlush[i];
+  if (mDeckcardsSuit[i] == flush_suit) flush_key  = mDeckcardsFlush[i];
   if (mDeckcardsSuit[j] == flush_suit) flush_key += mDeckcardsFlush[j];
   if (mDeckcardsSuit[k] == flush_suit) flush_key += mDeckcardsFlush[k];
   if (mDeckcardsSuit[l] == flush_suit) flush_key += mDeckcardsFlush[l];
@@ -210,4 +210,3 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
   if (mDeckcardsSuit[p] == flush_suit) flush_key += mDeckcardsFlush[p];
   return mFlushRankPtr[flush_key];
 }
-
