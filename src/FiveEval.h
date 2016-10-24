@@ -21,6 +21,7 @@
 #define SKPOKEREVAL_FIVEEVAL_H
 
 #include "Constants.h"
+#include <cstdint>
 
 class FiveEval {
 public:
@@ -29,17 +30,17 @@ public:
   // Get the rank of a hand comprising five cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  short unsigned GetRank(int, int, int, int, int) const;
+  uint16_t GetRank(int, int, int, int, int) const;
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  short unsigned GetRank(int, int, int, int, int, int, int) const;
+  uint16_t GetRank(int, int, int, int, int, int, int) const;
 private:
-  short unsigned *mRankPtr;
-  short unsigned *mFlushRankPtr;
-  int unsigned mDeckcardsFace[DECK_SIZE];
-  short unsigned mDeckcardsFlush[DECK_SIZE];
-  short unsigned mDeckcardsSuit[DECK_SIZE];
+  uint16_t *mRankPtr;
+  uint16_t *mFlushRankPtr;
+  uint32_t mDeckcardsFace[DECK_SIZE];
+  uint16_t mDeckcardsFlush[DECK_SIZE];
+  uint16_t mDeckcardsSuit[DECK_SIZE];
 };
 
 #endif // SKPOKEREVAL_FIVEEVAL_H

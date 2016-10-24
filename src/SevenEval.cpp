@@ -1,8 +1,10 @@
 #include "SevenEval.h"
 #include "FiveEval.h"
+#include "RankHash.h"
+#include "RankOffsets.h"
 #include <cstring>
 
-SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
+SevenEval::SevenEval() :
     mFlushRankPtr(new short unsigned[MAX_SEVEN_FLUSH_KEY_INT+1]) {
   int const face[13] = {ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX,
     FIVE, FOUR, THREE, TWO};
@@ -30,35 +32,6 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
   
   // Generate seven-ranks from five-ranks.
   FiveEval const eval;
-  
-  // Non-flush ranks.
-  for (int i = 1; i < 13; ++i) {
-    int const I = i<<2;
-    for (int j = 1; j <= i; ++j) {
-      int const J = j<<2;
-      for (int k = 1; k <= j; ++k) {
-        int const K = k<<2;
-        for (int l = 0; l <= k; ++l) {
-          int const L = l<<2;
-          for (int m = 0; m <= l && m < i; ++m) {
-            int const M = (m<<2)+1;
-            for (int n = 0; n <= m && n < j; ++n) {
-              int const N = (n<<2)+1;
-              for (int p = 0; p <= n && p < k; ++p) {
-                int const P = (p<<2)+1;
-                int const key = face[i] + face[j] + face[k] + face[l] +
-                    face[m] + face[n] + face[p];
-                // The (4*i)+0 and (4*m)+1 trick prevents flushes.
-                short unsigned const rank = eval.GetRank(I, J, K, L, M, N, P);
-                mRankPtr[key < CIRCUMFERENCE_SEVEN ?
-                    key : key - CIRCUMFERENCE_SEVEN] = rank;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
   
   // Flush ranks, all seven of the same suit.
   for (int i = 6; i < 13; ++i) {
@@ -181,7 +154,6 @@ SevenEval::SevenEval() : mRankPtr(new short unsigned[CIRCUMFERENCE_SEVEN]),
 }
 
 SevenEval::~SevenEval() {
-  delete[] mRankPtr;
   delete[] mFlushRankPtr;
 }
 
@@ -195,9 +167,8 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
   if (flush_suit == NOT_A_FLUSH) {
     // Tear off the non-flush key strip, and look up the rank.
     key >>= NON_FLUSH_BIT_SHIFT;
-    // Take key modulo the circumference.
-    return mRankPtr[(key < CIRCUMFERENCE_SEVEN ? key :
-                     key - CIRCUMFERENCE_SEVEN)];
+    return rank_hash[offsets[
+      key >> RANK_OFFSET_SHIFT] + (key & RANK_HASH_MOD)];
   }
   // Generate a flush key, and look up the rank.
   int flush_key = 0;

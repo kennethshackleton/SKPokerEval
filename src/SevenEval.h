@@ -30,9 +30,8 @@ public:
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  short unsigned GetRank(int, int, int, int, int, int, int) const;
+  uint16_t GetRank(int i, int j, int k, int l, int m, int n, int p) const;
 private:
-  uint16_t *mRankPtr;
   uint16_t *mFlushRankPtr;
   uint32_t mDeckcardsKey[DECK_SIZE];
   uint16_t mDeckcardsFlush[DECK_SIZE];

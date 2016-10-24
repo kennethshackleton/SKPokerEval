@@ -3,10 +3,10 @@
 FiveEval::FiveEval() :
 mRankPtr(new short unsigned[MAX_FIVE_NONFLUSH_KEY_INT+1]),
 mFlushRankPtr(new short unsigned[MAX_FIVE_FLUSH_KEY_INT+1]) {
-  int unsigned const face[13] = {TWO_FIVE, THREE_FIVE, FOUR_FIVE, FIVE_FIVE,
+  uint32_t const face[13] = {TWO_FIVE, THREE_FIVE, FOUR_FIVE, FIVE_FIVE,
     SIX_FIVE, SEVEN_FIVE, EIGHT_FIVE, NINE_FIVE, TEN_FIVE, JACK_FIVE,
     QUEEN_FIVE, KING_FIVE, ACE_FIVE};
-  int unsigned const face_flush[13] = {TWO_FLUSH, THREE_FLUSH, FOUR_FLUSH,
+  uint32_t const face_flush[13] = {TWO_FLUSH, THREE_FLUSH, FOUR_FLUSH,
     FIVE_FLUSH, SIX_FLUSH, SEVEN_FLUSH, EIGHT_FLUSH, NINE_FLUSH, TEN_FLUSH,
     JACK_FLUSH, QUEEN_FLUSH, KING_FLUSH, ACE_FLUSH};
   
@@ -160,15 +160,14 @@ short unsigned FiveEval::GetRank(int const card_one, int const card_two,
                   mDeckcardsFace[card_five]];
 }
 
-short unsigned FiveEval::GetRank(int const card_one, int const card_two,
-                                 int const card_three, int const card_four,
-                                 int const card_five, int const card_six,
-                                 int const card_seven) const {
+uint16_t FiveEval::GetRank(int const card_one, int const card_two,
+  int const card_three, int const card_four, int const card_five,
+  int const card_six, int const card_seven) const {
   int const seven_cards[7] = {card_one, card_two, card_three, card_four,
     card_five, card_six, card_seven};
   int temp[5];
   
-  short unsigned best_rank_so_far = 0, current_rank = 0;
+  uint16_t best_rank_so_far = 0, current_rank = 0;
   int m = 0;
   
   for (int i = 1; i < 7; ++i) {

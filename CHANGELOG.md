@@ -1,5 +1,9 @@
 ### Change Log
 
+#### 1.4.2
+
+* CHM perfect hash of seven rank keys, optimisation that also reduces footprint.
+
 #### 1.4.1
 
 * Minor optimisation when ranking flushes.

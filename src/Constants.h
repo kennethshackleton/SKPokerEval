@@ -86,16 +86,17 @@
 #define	MAX_SEVEN_FLUSH_KEY_INT (ACE_FLUSH+KING_FLUSH+QUEEN_FLUSH+JACK_FLUSH+\
                                  TEN_FLUSH+NINE_FLUSH+EIGHT_FLUSH)
 
-#define MAX_FLUSH_CHECK_SUM (7*CLUB)
+#define RANK_OFFSET_SHIFT 12
+#define RANK_HASH_MOD 4095
 
-#define CIRCUMFERENCE_SEVEN 4565145
+#define MAX_FLUSH_CHECK_SUM (7*CLUB)
 
 // Used in flush checking. These must be distinct from each of the suits.
 #define UNVERIFIED -1
 #define NOT_A_FLUSH -2
 
 // Bit masks
-#define SUIT_BIT_MASK 511
 #define NON_FLUSH_BIT_SHIFT 9
+#define SUIT_BIT_MASK (1<<NON_FLUSH_BIT_SHIFT)-1
 
 #endif // SKPOKEREVAL_CONSTANTS_H_
