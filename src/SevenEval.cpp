@@ -164,11 +164,11 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
     mDeckcardsKey[l] + mDeckcardsKey[m] + mDeckcardsKey[n] + mDeckcardsKey[p];
   // Tear off the flush check strip.
   int_fast16_t const flush_suit = mFlushCheck[key & SUIT_BIT_MASK];
-  if (flush_suit == NOT_A_FLUSH) {
+  if (NOT_A_FLUSH == flush_suit) {
     // Tear off the non-flush key strip, and look up the rank.
     key >>= NON_FLUSH_BIT_SHIFT;
-    return rank_hash[offsets[
-      key >> RANK_OFFSET_SHIFT] + (key & RANK_HASH_MOD)];
+    return rank_hash[offsets[key >> RANK_OFFSET_SHIFT] +
+      (key & RANK_HASH_MOD)];
   }
   // Generate a flush key, and look up the rank.
   int flush_key = 0;
