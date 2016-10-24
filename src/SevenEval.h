@@ -30,33 +30,8 @@ public:
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  inline short unsigned GetRank(int const i, int const j, int const k,
-      int const l, int const m, int const n, int const p) const {
-    // Create a 7-card hand key by adding up each of the card keys.
-    uint_fast32_t key = mDeckcardsKey[i] + mDeckcardsKey[j] + mDeckcardsKey[k] +
-      mDeckcardsKey[l] + mDeckcardsKey[m] + mDeckcardsKey[n] + mDeckcardsKey[p];
-    // Tear off the flush check strip.
-    int_fast16_t const flush_suit = mFlushCheck[key & SUIT_BIT_MASK];
-    if (flush_suit == NOT_A_FLUSH) {
-      // Tear off the non-flush key strip, and look up the rank.
-      key >>= NON_FLUSH_BIT_SHIFT;
-      // Take key modulo the circumference.
-      return mRankPtr[(key < CIRCUMFERENCE_SEVEN ? key :
-                       key - CIRCUMFERENCE_SEVEN)];
-    }
-    // Generate a flush key, and look up the rank.
-    int flush_key = 0;
-    if (mDeckcardsSuit[i] == flush_suit) flush_key  = mDeckcardsFlush[i];
-    if (mDeckcardsSuit[j] == flush_suit) flush_key += mDeckcardsFlush[j];
-    if (mDeckcardsSuit[k] == flush_suit) flush_key += mDeckcardsFlush[k];
-    if (mDeckcardsSuit[l] == flush_suit) flush_key += mDeckcardsFlush[l];
-    if (mDeckcardsSuit[m] == flush_suit) flush_key += mDeckcardsFlush[m];
-    if (mDeckcardsSuit[n] == flush_suit) flush_key += mDeckcardsFlush[n];
-    if (mDeckcardsSuit[p] == flush_suit) flush_key += mDeckcardsFlush[p];
-    return mFlushRankPtr[flush_key];
-  }
+  uint16_t GetRank(int i, int j, int k, int l, int m, int n, int p) const;
 private:
-  uint16_t *mRankPtr;
   uint16_t *mFlushRankPtr;
   uint32_t mDeckcardsKey[DECK_SIZE];
   uint16_t mDeckcardsFlush[DECK_SIZE];
