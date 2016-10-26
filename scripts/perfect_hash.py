@@ -46,6 +46,7 @@ for i in xrange(1, 13):
                             keys.add(key)
                             max_key = max(max_key, key)
 
+print "Key count is %i." % (len(keys),)
 print "Max key is %i." % (max_key,)
 
 side = 1  # Power of 2 to ultimately optimise hash key calculation.
@@ -69,7 +70,6 @@ for i in xrange(0, len(offset)):
     for j in xrange(0, len(hash_table)-side):
         collision = False
         for k in xrange(0, side):
-            x = square[k][i]
             if hash_table[j+k] != -1 and square[k][i] != -1:
                 collision = True
                 break
@@ -78,9 +78,10 @@ for i in xrange(0, len(offset)):
             for k in xrange(0, side):
                 x = square[k][i]
                 if x != -1:
-                    hash_table[j + k] = x
-            hash_table_len = max(hash_table_len, j + side)
-            print "Offset of row %i is %i (length %i)." % (i, j, hash_table_len)
+                    hash_table[j+k] = x
+            hash_table_len = max(hash_table_len, j+side)
+            print "Offset of row %i is %i (length %i)." %\
+                (i, j, hash_table_len)
             break
 
 f = open('./hash_table', 'w')
