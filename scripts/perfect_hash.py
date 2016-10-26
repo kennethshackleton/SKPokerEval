@@ -77,9 +77,10 @@ for i in xrange(0, len(offset)):
             for k in xrange(0, side):
                 x = square[k][i]
                 if x != -1:
-                    hash_table[j + k] = x
-            hash_table_len = max(hash_table_len, j + side)
-            print "Offset of row %i is %i (length %i)." % (i, j, hash_table_len)
+                    hash_table[j+k] = x
+            hash_table_len = max(hash_table_len, j+side)
+            print "Offset of row %i is %i (length %i)." %\
+                (i, j, hash_table_len)
             break
 
 f = open('./hash_table', 'w')
