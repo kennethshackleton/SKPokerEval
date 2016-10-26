@@ -46,6 +46,7 @@ for i in xrange(1, 13):
                             keys.add(key)
                             max_key = max(max_key, key)
 
+print "Key count is %i." % (len(keys),)
 print "Max key is %i." % (max_key,)
 
 side = 1  # Power of 2 to ultimately optimise hash key calculation.
