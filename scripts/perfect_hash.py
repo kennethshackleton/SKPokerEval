@@ -69,7 +69,6 @@ for i in xrange(0, len(offset)):
     for j in xrange(0, len(hash_table)-side):
         collision = False
         for k in xrange(0, side):
-            x = square[k][i]
             if hash_table[j+k] != -1 and square[k][i] != -1:
                 collision = True
                 break
