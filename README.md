@@ -1,6 +1,6 @@
 # SKPokerEval
 
-SKPokerEval is a lightweight 32-bit Texas Hold'em 7-card hand evaluator written in C++.
+A lightweight 32-bit Texas Hold'em 7-card hand evaluator written in C++.
 
 ## Travis status
 
