@@ -2,10 +2,10 @@
 #include "FiveEval.h"
 #include "RankHash.h"
 #include "RankOffsets.h"
+#include "FlushRanks.h"
 #include <cstring>
 
-SevenEval::SevenEval() :
-    mFlushRankPtr(new short unsigned[MAX_SEVEN_FLUSH_KEY_INT+1]) {
+SevenEval::SevenEval() {
   int const face[13] = {ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX,
     FIVE, FOUR, THREE, TWO};
   int const face_flush[13] = {ACE_FLUSH, KING_FLUSH, QUEEN_FLUSH, JACK_FLUSH,
@@ -28,78 +28,6 @@ SevenEval::SevenEval() :
     mDeckcardsSuit[N+1] = HEART;
     mDeckcardsSuit[N+2] = DIAMOND;
     mDeckcardsSuit[N+3] = CLUB;
-  }
-  
-  // Generate seven-ranks from five-ranks.
-  FiveEval const eval;
-  
-  // Flush ranks, all seven of the same suit.
-  for (int i = 6; i < 13; ++i) {
-    int const I = i<<2;
-    for (int j = 5; j < i; ++j) {
-      int const J = j<<2;
-      for (int k = 4; k < j; ++k) {
-        int const K = k<<2;
-        for (int l = 3; l < k; ++l) {
-          int const L = l<<2;
-          for (int m = 2; m < l; ++m) {
-            int const M = m<<2;
-            for (int n = 1; n < m; ++n) {
-              int const N = n<<2;
-              for (int p = 0; p < n; ++p) {
-                int const key = face_flush[i] + face_flush[j] + face_flush[k] +
-                    face_flush[l] + face_flush[m] + face_flush[n] +
-                    face_flush[p];
-                mFlushRankPtr[key] = eval.GetRank(I, J, K, L, M, N, p<<2);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  // Only six cards of the same suit.
-  for (int i = 5; i < 13; ++i) {
-    int const I = i<<2;
-    for (int j = 4; j < i; ++j) {
-      int const J = j<<2;
-      for (int k = 3; k < j; ++k) {
-        int const K = k<<2;
-        for (int l = 2; l < k; ++l) {
-          int const L = l<<2;
-          for (int m = 1; m < l; ++m) {
-            int const M = m<<2;
-            for (int n = 0; n < m; ++n) {
-              int const key = face_flush[i] + face_flush[j] + face_flush[k] +
-                  face_flush[l] + face_flush[m] + face_flush[n];
-              // The Two of Clubs is the card at index 51; the other six cards
-              // all have the Spade suit.
-              mFlushRankPtr[key] = eval.GetRank(I, J, K, L, M, n<<2, 51);
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  // Only five cards of one suit.
-  for (int i = 4; i < 13; ++i) {
-    int const I = i<<2;
-    for (int j = 3; j < i; ++j) {
-      int const J = j<<2;
-      for (int k = 2; k < j; ++k) {
-        int const K = k<<2;
-        for (int l = 1; l < k; ++l) {
-          int const L = l<<2;
-          for (int m = 0; m < l; ++m) {
-            int const key = face_flush[i] + face_flush[j] + face_flush[k] +
-                face_flush[l] + face_flush[m];
-            mFlushRankPtr[key] = eval.GetRank(I, J, K, L, m<<2);
-          }
-        }
-      }
-    }
   }
   
   // Initialise flush checks.
@@ -153,11 +81,9 @@ SevenEval::SevenEval() :
   }
 }
 
-SevenEval::~SevenEval() {
-  delete[] mFlushRankPtr;
-}
+SevenEval::~SevenEval() {}
 
-short unsigned SevenEval::GetRank(int const i, int const j, int const k,
+uint16_t SevenEval::GetRank(int const i, int const j, int const k,
     int const l, int const m, int const n, int const p) const {
   // Create a 7-card hand key by adding up each of the card keys.
   uint_fast32_t key = mDeckcardsKey[i] + mDeckcardsKey[j] + mDeckcardsKey[k] +
@@ -179,5 +105,5 @@ short unsigned SevenEval::GetRank(int const i, int const j, int const k,
   if (mDeckcardsSuit[m] == flush_suit) flush_key += mDeckcardsFlush[m];
   if (mDeckcardsSuit[n] == flush_suit) flush_key += mDeckcardsFlush[n];
   if (mDeckcardsSuit[p] == flush_suit) flush_key += mDeckcardsFlush[p];
-  return mFlushRankPtr[flush_key];
+  return flush_ranks[flush_key];
 }

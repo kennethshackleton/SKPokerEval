@@ -32,7 +32,6 @@ public:
   // The higher the rank the better the hand. Two hands of equal rank tie.
   uint16_t GetRank(int i, int j, int k, int l, int m, int n, int p) const;
 private:
-  uint16_t *mFlushRankPtr;
   uint32_t mDeckcardsKey[DECK_SIZE];
   uint16_t mDeckcardsFlush[DECK_SIZE];
   uint16_t mDeckcardsSuit[DECK_SIZE];
