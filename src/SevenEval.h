@@ -35,7 +35,6 @@ private:
   uint32_t mDeckcardsKey[DECK_SIZE];
   uint16_t mDeckcardsFlush[DECK_SIZE];
   uint16_t mDeckcardsSuit[DECK_SIZE];
-  int16_t mFlushCheck[MAX_FLUSH_CHECK_SUM+1];
 };
 
 #endif // SKPOKEREVAL_SEVENEVAL_H
