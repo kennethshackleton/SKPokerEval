@@ -3,7 +3,8 @@
 #include "RankHash.h"
 #include "RankOffsets.h"
 #include "FlushRanks.h"
-#include <cstring>
+#include "FlushCheck.h"
+#include <cstddef>
 
 SevenEval::SevenEval() {
   int const face[13] = {ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX,
@@ -11,9 +12,10 @@ SevenEval::SevenEval() {
   int const face_flush[13] = {ACE_FLUSH, KING_FLUSH, QUEEN_FLUSH, JACK_FLUSH,
     TEN_FLUSH, NINE_FLUSH, EIGHT_FLUSH, SEVEN_FLUSH, SIX_FLUSH, FIVE_FLUSH,
     FOUR_FLUSH, THREE_FLUSH, TWO_FLUSH};
-  for (int n = 0; n < 13; ++n) {
-    int const N = n<<2;
+  for (size_t n = 0; n < 13; ++n) {
+    size_t const N = n<<2;
     int unsigned const start = face[n] << NON_FLUSH_BIT_SHIFT;
+
     mDeckcardsKey[N  ] = start + SPADE;
     mDeckcardsKey[N+1] = start + HEART;
     mDeckcardsKey[N+2] = start + DIAMOND;
@@ -29,56 +31,6 @@ SevenEval::SevenEval() {
     mDeckcardsSuit[N+2] = DIAMOND;
     mDeckcardsSuit[N+3] = CLUB;
   }
-  
-  // Initialise flush checks.
-  short suit_count = 0, flush_suit_index = -1, cards_matched_so_far = 0;
-  short suit_key = SPADE;
-  short const suits[4] = {SPADE, HEART, DIAMOND, CLUB};
-
-  // Initialise all entries of mFlushCheck to UNVERIFIED, as yet unchecked.
-  memset(mFlushCheck, UNVERIFIED,
-      sizeof(mFlushCheck[0]) * (MAX_FLUSH_CHECK_SUM+1));
-
-  // Seven-card flush.
-  for (int i = 0; i < NUMBER_OF_SUITS; ++i) {
-    for (int j = 0; j <= i; ++j) {
-      for (int k = 0; k <= j; ++k) {
-        for (int l = 0; l <= k; ++l) {
-          for (int m = 0; m <= l; ++m) {
-            for (int n = 0; n <= m; ++n) {
-              for (int p = 0; p <= n; ++p) {
-                flush_suit_index = -1;
-                cards_matched_so_far = 0;
-                suit_key = suits[i] + suits[j] + suits[k] +
-                    suits[l] + suits[m] + suits[n] + suits[p];
-                if (UNVERIFIED == mFlushCheck[suit_key]) {
-                  do {
-                    ++flush_suit_index;
-                    suit_count = (suits[i] == suits[flush_suit_index]) +
-                        (suits[j] == suits[flush_suit_index]) +
-                        (suits[k] == suits[flush_suit_index]) +
-                        (suits[l] == suits[flush_suit_index]) +
-                        (suits[m] == suits[flush_suit_index]) +
-                        (suits[n] == suits[flush_suit_index]) +
-                        (suits[p] == suits[flush_suit_index]);
-                    cards_matched_so_far += suit_count;
-                  } while (cards_matched_so_far < 3 && flush_suit_index < 4);
-                  // A count of 5 or more means we have a flush. We place the
-                  // value of the flush suit here.
-                  if (suit_count > 4) {
-                    mFlushCheck[suit_key] = suits[flush_suit_index];
-                  } else {
-                    // Otherwise this is a non-flush hand.
-                    mFlushCheck[suit_key] = NOT_A_FLUSH;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }
 
 SevenEval::~SevenEval() {}
@@ -89,7 +41,7 @@ uint16_t SevenEval::GetRank(int const i, int const j, int const k,
   uint_fast32_t key = mDeckcardsKey[i] + mDeckcardsKey[j] + mDeckcardsKey[k] +
     mDeckcardsKey[l] + mDeckcardsKey[m] + mDeckcardsKey[n] + mDeckcardsKey[p];
   // Tear off the flush check strip.
-  int_fast16_t const flush_suit = mFlushCheck[key & SUIT_BIT_MASK];
+  int_fast8_t const flush_suit = flush_check[key & SUIT_BIT_MASK];
   if (NOT_A_FLUSH == flush_suit) {
     // Tear off the non-flush key strip, and look up the rank.
     key >>= NON_FLUSH_BIT_SHIFT;
