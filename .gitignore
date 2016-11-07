@@ -18,4 +18,6 @@ build/
 libskpokereval.a
 lib
 SKConfig.h
+*.o
+
 
