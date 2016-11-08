@@ -6,16 +6,6 @@ A lightweight 32-bit Texas Hold'em 7-card hand evaluator written in C++.
 
 [![Build Status](https://travis-ci.org/kennethshackleton/SKPokerEval.svg)](https://travis-ci.org/kennethshackleton/SKPokerEval)
 
-## Build instructions
-
-From the root directory of the project execute:
-
-```
-./configure && cmake . && make && ctest
-```
-
-This will build the library and run unit tests.
-
 ## Example
 
 ```
