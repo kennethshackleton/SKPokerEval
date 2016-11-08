@@ -23,9 +23,8 @@ This will build the library and run unit tests.
 #include "SevenEval.h"
 
 int main() {
-  SevenEval const eval;
   // Get the rank of the seven-card spade flush, ace high.
-  std::cout << eval.GetRank(0, 4, 8, 12, 16, 20, 24) << std::endl;
+  std::cout << SevenEval::GetRank(0, 4, 8, 12, 16, 20, 24) << std::endl;
   return 0;
 }
 ```
