@@ -26,7 +26,7 @@
 #include <ctime>
 
 template <class T>
-void doNotOptimiseAway(T&& datum) {
+inline void doNotOptimiseAway(T&& datum) {
     asm volatile("" : "+r"(datum));
 }
 
@@ -55,7 +55,6 @@ public:
             }
         }
         std::clock_t const c_start = std::clock();
-        uint8_t r = 0;
         for (int i = 0; i < length; i += 7) {
             doNotOptimiseAway(
                 eval.GetRank(buffer[i], buffer[i+1], buffer[i+2], buffer[i+3],
