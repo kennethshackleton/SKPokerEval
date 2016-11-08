@@ -9,7 +9,6 @@ protected:
   virtual void TearDown() {}
 
   FiveEval const five_eval;
-  SevenEval const seven_eval;
 };
 
 TEST_F(SevenEvalTest, CompareWithFiveEval) {
@@ -21,7 +20,7 @@ TEST_F(SevenEvalTest, CompareWithFiveEval) {
             for (int n = m+1; n < 51; ++n) {
               for (int p = n+1; p < 52; ++p) {
                 int const five_rank = five_eval.GetRank(i, j, k, l, m, n, p);
-                int const seven_rank = seven_eval.GetRank(i, j, k, l, m, n, p);
+                int const seven_rank = SevenEval::GetRank(i, j, k, l, m, n, p);
                 ASSERT_EQ(five_rank, seven_rank) << "Ranks at "
                                                  << i << ", "
                                                  << j << ", "

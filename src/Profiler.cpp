@@ -32,7 +32,7 @@ inline void doNotOptimiseAway(T&& datum) {
 
 class Profiler {
 public:
-    static clock_t Profile(SevenEval const& eval, int unsigned const count) {
+    static clock_t Profile(int unsigned const count) {
         std::default_random_engine gen;
         std::uniform_int_distribution<int> dist(0, 51);
         int const length = 7*count;
@@ -57,8 +57,8 @@ public:
         std::clock_t const c_start = std::clock();
         for (int i = 0; i < length; i += 7) {
             doNotOptimiseAway(
-                eval.GetRank(buffer[i], buffer[i+1], buffer[i+2], buffer[i+3],
-                    buffer[i+4], buffer[i+5], buffer[i+6])
+                SevenEval::GetRank(buffer[i], buffer[i+1], buffer[i+2],
+                    buffer[i+3], buffer[i+4], buffer[i+5], buffer[i+6])
             );
         }
         std::clock_t const c_end = std::clock();
@@ -68,8 +68,7 @@ public:
 };
 
 int main() {
-    SevenEval const eval;
-    clock_t const duration = Profiler::Profile(eval, 50000000);
+    clock_t const duration = Profiler::Profile(50000000);
     std::cout << 1000.0 * duration / CLOCKS_PER_SEC << " ms" << std::endl;
 }
 

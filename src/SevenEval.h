@@ -21,20 +21,43 @@
 #define SKPOKEREVAL_SEVENEVAL_H
 
 #include <cstdint>
+#include "RankHash.h"
+#include "RankOffsets.h"
+#include "FlushRanks.h"
+#include "FlushCheck.h"
+#include "Deckcards.h"
 #include "Constants.h"
 
 class SevenEval {
 public:
-  SevenEval();
-  ~SevenEval();
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  uint16_t GetRank(int i, int j, int k, int l, int m, int n, int p) const;
-private:
-  uint32_t mDeckcardsKey[DECK_SIZE];
-  uint16_t mDeckcardsFlush[DECK_SIZE];
-  uint16_t mDeckcardsSuit[DECK_SIZE];
+  static inline uint16_t GetRank(int i, int j, int k, int l, int m, int n,
+      int p) {
+    // Create a 7-card hand key by adding up each of the card keys.
+    uint_fast32_t key = deckcards_key[i] + deckcards_key[j] +
+      deckcards_key[k] + deckcards_key[l] + deckcards_key[m] +
+      deckcards_key[n] + deckcards_key[p];
+    // Tear off the flush check strip.
+    int_fast8_t const flush_suit = flush_check[key & SUIT_BIT_MASK];
+    if (NOT_A_FLUSH == flush_suit) {
+      // Tear off the non-flush key strip, and look up the rank.
+      key >>= NON_FLUSH_BIT_SHIFT;
+      return rank_hash[offsets[key >> RANK_OFFSET_SHIFT] +
+        (key & RANK_HASH_MOD)];
+    }
+    // Generate a flush key, and look up the rank.
+    int flush_key = 0;
+    if (deckcards_suit[i] == flush_suit) flush_key  = deckcards_flush[i];
+    if (deckcards_suit[j] == flush_suit) flush_key += deckcards_flush[j];
+    if (deckcards_suit[k] == flush_suit) flush_key += deckcards_flush[k];
+    if (deckcards_suit[l] == flush_suit) flush_key += deckcards_flush[l];
+    if (deckcards_suit[m] == flush_suit) flush_key += deckcards_flush[m];
+    if (deckcards_suit[n] == flush_suit) flush_key += deckcards_flush[n];
+    if (deckcards_suit[p] == flush_suit) flush_key += deckcards_flush[p];
+    return flush_ranks[flush_key];
+  }
 };
 
 #endif // SKPOKEREVAL_SEVENEVAL_H
