@@ -20,13 +20,13 @@
 #ifndef SKPOKEREVAL_SEVENEVAL_H
 #define SKPOKEREVAL_SEVENEVAL_H
 
-#include <cstdint>
 #include "RankHash.h"
 #include "RankOffsets.h"
 #include "FlushRanks.h"
 #include "FlushCheck.h"
 #include "Deckcards.h"
 #include "Constants.h"
+#include <cstdint>
 
 class SevenEval {
 public:
@@ -36,9 +36,8 @@ public:
   static inline uint16_t GetRank(int i, int j, int k, int l, int m, int n,
       int p) {
     // Create a 7-card hand key by adding up each of the card keys.
-    uint_fast32_t key = deckcards_key[i] + deckcards_key[j] +
-      deckcards_key[k] + deckcards_key[l] + deckcards_key[m] +
-      deckcards_key[n] + deckcards_key[p];
+    uint_fast32_t key = card[i] + card[j] + card[k] + card[l] + card[m] +
+      card[n] + card[p];
     // Tear off the flush check strip.
     int_fast8_t const flush_suit = flush_check[key & SUIT_BIT_MASK];
     if (NOT_A_FLUSH == flush_suit) {
@@ -49,13 +48,13 @@ public:
     }
     // Generate a flush key, and look up the rank.
     int flush_key = 0;
-    if (deckcards_suit[i] == flush_suit) flush_key  = deckcards_flush[i];
-    if (deckcards_suit[j] == flush_suit) flush_key += deckcards_flush[j];
-    if (deckcards_suit[k] == flush_suit) flush_key += deckcards_flush[k];
-    if (deckcards_suit[l] == flush_suit) flush_key += deckcards_flush[l];
-    if (deckcards_suit[m] == flush_suit) flush_key += deckcards_flush[m];
-    if (deckcards_suit[n] == flush_suit) flush_key += deckcards_flush[n];
-    if (deckcards_suit[p] == flush_suit) flush_key += deckcards_flush[p];
+    if (suit[i] == flush_suit) flush_key  = flush[i];
+    if (suit[j] == flush_suit) flush_key += flush[j];
+    if (suit[k] == flush_suit) flush_key += flush[k];
+    if (suit[l] == flush_suit) flush_key += flush[l];
+    if (suit[m] == flush_suit) flush_key += flush[m];
+    if (suit[n] == flush_suit) flush_key += flush[n];
+    if (suit[p] == flush_suit) flush_key += flush[p];
     return flush_ranks[flush_key];
   }
 };
