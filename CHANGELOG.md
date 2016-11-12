@@ -1,5 +1,11 @@
 ### Change Log
 
+#### 1.5.0
+
+* Static interface.
+* Include scripts for key generation and hashing.
+* Include profiler.
+
 #### 1.4.2
 
 * CHM perfect hash of seven rank keys, optimisation that also reduces footprint.
@@ -31,4 +37,3 @@
 #### 1.0
 
 * Settle on publishing only in C++.
-
