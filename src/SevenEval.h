@@ -40,7 +40,7 @@ public:
       card[n] + card[p];
     // Tear off the flush check strip.
     int_fast8_t const flush_suit = flush_check[key & SUIT_BIT_MASK];
-    if (NOT_A_FLUSH == flush_suit) {
+    if (__builtin_expect(NOT_A_FLUSH == flush_suit, 1)) {
       // Tear off the non-flush key strip, and look up the rank.
       key >>= NON_FLUSH_BIT_SHIFT;
       return rank_hash[offsets[key >> RANK_OFFSET_SHIFT] +
