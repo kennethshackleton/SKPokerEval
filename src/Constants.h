@@ -30,6 +30,11 @@
 #define DIAMOND 8
 #define CLUB 57
 
+#define INDEX_SPADE 0
+#define INDEX_HEART 1
+#define INDEX_DIAMOND 2
+#define INDEX_CLUB 3
+
 #define TWO_FIVE 0
 #define THREE_FIVE 1
 #define FOUR_FIVE 5
