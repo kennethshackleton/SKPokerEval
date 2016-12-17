@@ -78,12 +78,19 @@ public:
   }
 };
 
+float clocksToMilliseconds(clock_t c) {
+    return 1000.0f * c / CLOCKS_PER_SEC;
+}
+
 int main() {
   clock_t fastest = std::numeric_limits<clock_t>::max();
   for (int i = 0; i < 20; ++i) {
-    fastest = std::min(fastest, Profiler::Profile(12500000));
+    clock_t const profile = Profiler::Profile(12500000);
+    fastest = std::min(fastest, profile);
+    std::cout << i << ": " << clocksToMilliseconds(profile) << "ms"
+      << std::endl;
   }
-  std::cout << 1000.0f * fastest / CLOCKS_PER_SEC << " ms" << std::endl;
+  std::cout << "Result: " << clocksToMilliseconds(fastest) << "ms" << std::endl;
 }
 
 #endif
