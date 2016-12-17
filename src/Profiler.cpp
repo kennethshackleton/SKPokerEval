@@ -79,7 +79,7 @@ public:
 };
 
 float clocksToMilliseconds(clock_t c) {
-    return 1000.0f * c / CLOCKS_PER_SEC;
+  return 1000.0f * c / CLOCKS_PER_SEC;
 }
 
 int main() {
