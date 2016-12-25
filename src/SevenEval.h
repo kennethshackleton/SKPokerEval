@@ -40,14 +40,14 @@ public:
       card[n] + card[p];
     // Tear off the flush check strip.
     int_fast8_t const flush_suit = flush_check[key & SUIT_BIT_MASK];
-    if (__builtin_expect(NOT_A_FLUSH == flush_suit, 1)) {
+    if (NOT_A_FLUSH == flush_suit) {
       // Tear off the non-flush key strip, and look up the rank.
       key >>= NON_FLUSH_BIT_SHIFT;
       return rank_hash[offsets[key >> RANK_OFFSET_SHIFT] +
         (key & RANK_HASH_MOD)];
     }
     // Generate a flush key, and look up the rank.
-    int flush_key = 0;
+    uint_fast16_t flush_key = 0;
     if (suit[i] == flush_suit) flush_key  = flush[i];
     if (suit[j] == flush_suit) flush_key += flush[j];
     if (suit[k] == flush_suit) flush_key += flush[k];
