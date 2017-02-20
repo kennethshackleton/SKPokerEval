@@ -8,7 +8,7 @@ A lightweight 32-bit Texas Hold'em 7-card hand evaluator written in C++.
 
 ## How do I use it?
 
-```
+```cpp
 #include <iostream>
 #include "SevenEval.h"
 
@@ -28,3 +28,15 @@ To start with we computed by brute force the first thirteen non-negative integer
 Similarly, we assign the integer values 0, 1, 8 and 57 for spade, heart, diamond and club respectively. Any sum of exactly seven values taken from {0, 1, 8, 57} is unique among all such sums. We add up the suits of a 7-card hand to produce a "flush check" key and use this to find a pre-calculated flush suit value (in the case we're looking at a flush) or otherwise a defined non-flush constant. The largest flush key we see is 7999, corresponding to any of the four 7-card straight flushes with ace high.
 
 The extraordinarily lucky aspect of this is that the maximum non-flush key we have, 7825759, is a 23-bit integer (note 2^23 = 8388608) and the largest suit key we find, 57*7 = 399, is a 9-bit integer (note 2^9 = 512). If we bit-shift a card's non-flush face value and add to this its flush check to make a card key in advance, when we aggregate the resulting card keys over a given 7-card hand we generate a 23+9 = 32-bit integer key for the whole hand. This integer key can only just be accommodated on a 32-bit machine and yet still carries enough information to decide if we're looking at a flush and if not to then look up the rank of the hand.
+
+## How might I profile my contribution?
+
+The project contains a [profiler](src/Profiler.cpp) which might be used to help benchmark your changes.
+
+```bash
+g++ -c -std=c++11 -O3 Profiler.cpp
+g++ -o profile Profiler.o
+./profile
+```
+
+Crudely, the lower the result the more efficiently the ranks were computed. This starts to be compelling with consistent gains of, say, 30% or more.
