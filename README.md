@@ -8,7 +8,7 @@ A lightweight 32-bit Texas Hold'em 7-card hand evaluator written in C++.
 
 ## How do I use it?
 
-```
+```cpp
 #include <iostream>
 #include "SevenEval.h"
 
