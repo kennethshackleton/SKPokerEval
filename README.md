@@ -33,7 +33,7 @@ The extraordinarily lucky aspect of this is that the maximum non-flush key we ha
 
 The project contains a [profiler](src/Profiler.cpp) which might be used to help benchmark your changes.
 
-```
+```bash
 g++ -c -std=c++11 -O3 Profiler.cpp
 g++ -o profile Profiler.o
 ./profile
