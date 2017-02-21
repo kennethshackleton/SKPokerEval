@@ -1,5 +1,9 @@
 ### Change Log
 
+#### 1.6.0
+
+* Optimise ranking flushes.
+
 #### 1.5.0
 
 * Static interface.

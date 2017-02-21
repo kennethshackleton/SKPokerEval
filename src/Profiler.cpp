@@ -37,7 +37,7 @@ public:
   static clock_t Profile(unsigned const count) {
     std::default_random_engine gen;
     std::uniform_int_distribution<int> dist(0, 51);
-    int const length = 7*count;
+    int const length = 28*count;
     unsigned * const buffer = (unsigned *) malloc(length * sizeof(unsigned));
     for (int i = 0; i < length; i += 7) {
       int j = 0;
@@ -54,10 +54,22 @@ public:
       }
     }
     std::clock_t const start = std::clock();
-    for (int i = 0; i < length; i += 7) {
+    for (int i = 0; i < length; i += 28) {
+      doNotOptimiseAway(
+        SevenEval::GetRank(buffer[i+21], buffer[i+22], buffer[i+23],
+          buffer[i+24], buffer[i+25], buffer[i+26], buffer[i+27])
+      );
       doNotOptimiseAway(
         SevenEval::GetRank(buffer[i], buffer[i+1], buffer[i+2],
           buffer[i+3], buffer[i+4], buffer[i+5], buffer[i+6])
+      );
+      doNotOptimiseAway(
+        SevenEval::GetRank(buffer[i+7], buffer[i+8], buffer[i+9],
+          buffer[i+10], buffer[i+11], buffer[i+12], buffer[i+13])
+      );
+      doNotOptimiseAway(
+        SevenEval::GetRank(buffer[i+14], buffer[i+15], buffer[i+16],
+          buffer[i+17], buffer[i+18], buffer[i+19], buffer[i+20])
       );
     }
     std::clock_t const end = std::clock();
@@ -66,12 +78,19 @@ public:
   }
 };
 
+float clocksToMilliseconds(clock_t c) {
+  return 1000.0f * c / CLOCKS_PER_SEC;
+}
+
 int main() {
   clock_t fastest = std::numeric_limits<clock_t>::max();
   for (int i = 0; i < 20; ++i) {
-    fastest = std::min(fastest, Profiler::Profile(50000000));
+    clock_t const profile = Profiler::Profile(12500000);
+    fastest = std::min(fastest, profile);
+    std::cout << i << ": " << clocksToMilliseconds(profile) << "ms"
+      << std::endl;
   }
-  std::cout << 1000.0f * fastest / CLOCKS_PER_SEC << " ms" << std::endl;
+  std::cout << "Result: " << clocksToMilliseconds(fastest) << "ms" << std::endl;
 }
 
 #endif

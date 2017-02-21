@@ -39,23 +39,16 @@ public:
     uint_fast32_t key = card[i] + card[j] + card[k] + card[l] + card[m] +
       card[n] + card[p];
     // Tear off the flush check strip.
-    int_fast8_t const flush_suit = flush_check[key & SUIT_BIT_MASK];
-    if (NOT_A_FLUSH == flush_suit) {
+    int_fast8_t const suit = flush_check[key & SUIT_BIT_MASK];
+    if (NOT_A_FLUSH == suit) {
       // Tear off the non-flush key strip, and look up the rank.
       key >>= NON_FLUSH_BIT_SHIFT;
       return rank_hash[offsets[key >> RANK_OFFSET_SHIFT] +
         (key & RANK_HASH_MOD)];
     }
     // Generate a flush key, and look up the rank.
-    int flush_key = 0;
-    if (suit[i] == flush_suit) flush_key  = flush[i];
-    if (suit[j] == flush_suit) flush_key += flush[j];
-    if (suit[k] == flush_suit) flush_key += flush[k];
-    if (suit[l] == flush_suit) flush_key += flush[l];
-    if (suit[m] == flush_suit) flush_key += flush[m];
-    if (suit[n] == flush_suit) flush_key += flush[n];
-    if (suit[p] == flush_suit) flush_key += flush[p];
-    return flush_ranks[flush_key];
+    uint_fast16_t const * const s = flushes[suit];
+    return flush_ranks[s[i] + s[j] + s[k] + s[l] + s[m] + s[n] + s[p]];
   }
 };
 
