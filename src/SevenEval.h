@@ -32,6 +32,7 @@ class SevenEval final {
 public:
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
+  // Two such integers of the same residue modulo 4 correspond to the same suit.
   // The higher the rank the better the hand. Two hands of equal rank tie.
   static inline uint16_t GetRank(int i, int j, int k, int l, int m, int n,
       int p) {
