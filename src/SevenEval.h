@@ -28,7 +28,7 @@
 #include "Constants.h"
 #include <cstdint>
 
-class SevenEval {
+class SevenEval final {
 public:
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
