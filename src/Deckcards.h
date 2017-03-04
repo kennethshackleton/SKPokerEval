@@ -122,7 +122,7 @@ uint_fast16_t const flush[DECK_SIZE] = {
   TWO_FLUSH,   TWO_FLUSH,   TWO_FLUSH,   TWO_FLUSH
 };
 
-uint_fast16_t const flushes[NUMBER_OF_SUITS][DECK_SIZE] = {
+uint_fast16_t const suit_kronecker[NUMBER_OF_SUITS][DECK_SIZE] = {
   {
     ACE_FLUSH,   0, 0, 0,
     KING_FLUSH,  0, 0, 0,

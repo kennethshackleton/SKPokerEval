@@ -48,7 +48,7 @@ public:
         (key & RANK_HASH_MOD)];
     }
     // Generate a flush key, and look up the rank.
-    uint_fast16_t const * const s = flushes[suit];
+    uint_fast16_t const * const s = suit_kronecker[suit];
     return flush_ranks[s[i] + s[j] + s[k] + s[m] + s[n] + s[p] + s[q]];
   }
 private:
