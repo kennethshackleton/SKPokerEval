@@ -50,6 +50,8 @@ public:
     uint_fast16_t const * const s = flushes[suit];
     return flush_ranks[s[i] + s[j] + s[k] + s[l] + s[m] + s[n] + s[p]];
   }
+private:
+  SevenEval() {}
 };
 
 #endif // SKPOKEREVAL_SEVENEVAL_H
