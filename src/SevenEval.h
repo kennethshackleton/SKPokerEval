@@ -28,16 +28,17 @@
 #include "Constants.h"
 #include <cstdint>
 
-class SevenEval {
+class SevenEval final {
 public:
   // Get the rank of a hand comprising seven cards, each represented by an
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
+  // Two such integers of the same residue modulo 4 correspond to the same suit.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  static inline uint16_t GetRank(int i, int j, int k, int l, int m, int n,
-      int p) {
+  static inline uint16_t GetRank(int i, int j, int k, int m, int n, int p,
+      int q) {
     // Create a 7-card hand key by adding up each of the card keys.
-    uint_fast32_t key = card[i] + card[j] + card[k] + card[l] + card[m] +
-      card[n] + card[p];
+    uint_fast32_t key = card[i] + card[j] + card[k] + card[m] + card[n] +
+      card[p] + card[q];
     // Tear off the flush check strip.
     int_fast8_t const suit = flush_check[key & SUIT_BIT_MASK];
     if (NOT_A_FLUSH == suit) {
@@ -47,9 +48,11 @@ public:
         (key & RANK_HASH_MOD)];
     }
     // Generate a flush key, and look up the rank.
-    uint_fast16_t const * const s = flushes[suit];
-    return flush_ranks[s[i] + s[j] + s[k] + s[l] + s[m] + s[n] + s[p]];
+    uint_fast16_t const * const s = suit_kronecker[suit];
+    return flush_ranks[s[i] + s[j] + s[k] + s[m] + s[n] + s[p] + s[q]];
   }
+private:
+  SevenEval() {}
 };
 
 #endif // SKPOKEREVAL_SEVENEVAL_H
