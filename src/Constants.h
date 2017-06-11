@@ -97,11 +97,11 @@
 #define MAX_FLUSH_CHECK_SUM (7*CLUB)
 
 // Used in flush checking. These must be distinct from each of the suits.
-#define UNVERIFIED -1
-#define NOT_A_FLUSH -2
+#define UNVERIFIED (-1)
+#define NOT_A_FLUSH (-2)
 
 // Bit masks
 #define NON_FLUSH_BIT_SHIFT 9
-#define SUIT_BIT_MASK (1<<NON_FLUSH_BIT_SHIFT)-1
+#define SUIT_BIT_MASK ((1<<NON_FLUSH_BIT_SHIFT)-1)
 
 #endif // SKPOKEREVAL_CONSTANTS_H_

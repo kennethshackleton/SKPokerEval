@@ -40,7 +40,7 @@ public:
     uint_fast32_t key = card[i] + card[j] + card[k] + card[m] + card[n] +
       card[p] + card[q];
     // Tear off the flush check strip.
-    int_fast8_t const suit = flush_check[key & SUIT_BIT_MASK];
+    int_fast8_t const suit = flush_check[(key & SUIT_BIT_MASK)];
     if (NOT_A_FLUSH == suit) {
       // Tear off the non-flush key strip, and look up the rank.
       key >>= NON_FLUSH_BIT_SHIFT;
