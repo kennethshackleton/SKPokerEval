@@ -24,13 +24,9 @@
 #include <thread>
 #include <future>
 #include <atomic>
-#include <stdexcept>
 
 template <class F>
 void ParallelFor(int const begin, int const end, F const fn) {
-  if (begin > end) {
-    throw std::invalid_argument("For-loop 'begin' must be at most 'end'.");
-  }
   std::atomic<int> idx(0);
   idx = begin;
   int const num_cpus = std::thread::hardware_concurrency();
