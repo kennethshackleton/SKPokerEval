@@ -84,12 +84,10 @@ for i in xrange(0, len(offset)):
                 (i, j, hash_table_len)
             break
 
-f = open('./hash_table', 'w')
-f.write("%s\n" % (hash_table[0:hash_table_len],))
-f.close()
+with open('./hash_table', 'w') as f:
+    f.write("%s\n" % (hash_table[0:hash_table_len],))
 
-f = open('./offset', 'w')
-f.write("%s\n" % (offset,))
-f.close()
+with open('./offset', 'w') as f:
+    f.write("%s\n" % (offset,))
 
 print "Hash table has length %i." % (hash_table_len,)
