@@ -24,7 +24,7 @@
 #include <algorithm>
 #include <random>
 #include <iostream>
-#include <ctime>
+#include <chrono>
 #include <limits>
 
 template <class T>
@@ -34,7 +34,7 @@ inline void doNotOptimiseAway(T&& datum) {
 
 class Profiler {
 public:
-  static clock_t Profile(unsigned const count) {
+  static double RandomAccessProfile(unsigned const count) {
     std::default_random_engine gen;
     std::uniform_int_distribution<int> dist(0, 51);
     int const length = 28*count;
@@ -53,7 +53,7 @@ public:
         if (accept) buffer[i+(j++)] = r;
       }
     }
-    std::clock_t const start = std::clock();
+    auto const start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < length; i += 28) {
       doNotOptimiseAway(
         SevenEval::GetRank(buffer[i+21], buffer[i+22], buffer[i+23],
@@ -72,25 +72,28 @@ public:
           buffer[i+17], buffer[i+18], buffer[i+19], buffer[i+20])
       );
     }
-    std::clock_t const end = std::clock();
+    auto const end = std::chrono::high_resolution_clock::now();
     delete buffer;
-    return end-start;
+    return 1e-6 * std::chrono::duration_cast<std::chrono::nanoseconds>(
+      end - start).count();
   }
 };
 
-float clocksToMilliseconds(clock_t c) {
-  return 1000.0f * c / CLOCKS_PER_SEC;
-}
-
 int main() {
-  clock_t fastest = std::numeric_limits<clock_t>::max();
+  std::cout << "Profiling SevenEval random access..." << std::endl;
+  long const numberOfHands = 50000000L;
+  auto fastest = std::numeric_limits<double>::max();
   for (int i = 0; i < 20; ++i) {
-    clock_t const profile = Profiler::Profile(12500000);
+    auto const profile = Profiler::RandomAccessProfile(numberOfHands / 4);
     fastest = std::min(fastest, profile);
-    std::cout << i << ": " << clocksToMilliseconds(profile) << "ms"
-      << std::endl;
+    std::cout << i << ": " << profile << " ms" << std::endl;
   }
-  std::cout << "Result: " << clocksToMilliseconds(fastest) << "ms" << std::endl;
+  std::cout << "Best random access time: " << fastest << " ms" << std::endl;
+  if (fastest > 0.0) {
+      double const handsPerSecond = (numberOfHands * 1000L) / fastest;
+      std::cout << "Best random access rate: " << handsPerSecond
+        << " hands/sec" << std::endl;
+  }
 }
 
 #endif
