@@ -39,4 +39,4 @@ g++ -o profile Profiler.o
 ./profile
 ```
 
-Crudely, the lower the result the more efficiently the ranks were computed. For optimisations this starts to be compelling with consistent gains of, say, 30% or more.
+For optimisations this starts to be compelling with consistent gains of, say, 30% or more.
