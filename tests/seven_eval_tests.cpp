@@ -1,18 +1,19 @@
 #include <gtest/gtest.h>
+#include <atomic>
+#include "Parallel.h"
 #include "../src/FiveEval.h"
 #include "../src/SevenEval.h"
 
 class SevenEvalTest : public ::testing::Test {
 protected:
   virtual void SetUp() {}
-
   virtual void TearDown() {}
-
   FiveEval const five_eval;
 };
 
 TEST_F(SevenEvalTest, CompareWithFiveEval) {
-  for (int i = 0; i < 46; ++i) {
+  std::atomic<long> count(0);
+  auto const outer = [&](int const& i) {
     for (int j = i+1; j < 47; ++j) {
       for (int k = j+1; k < 48; ++k) {
         for (int l = k+1; l < 49; ++l) {
@@ -30,12 +31,14 @@ TEST_F(SevenEvalTest, CompareWithFiveEval) {
                                                  << n << ", "
                                                  << p
                                                  << " differ.";
+                ++count;
               }
             }
           }
         }
       }
     }
-  }
+  };
+  ParallelFor(0, 46, outer);
+  ASSERT_EQ(133784560, count) << "Invalid number of seven card hands tested.";
 }
-

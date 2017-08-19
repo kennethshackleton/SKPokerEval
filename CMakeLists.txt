@@ -5,7 +5,7 @@ project(${PROJECT_NAME})
 
 # Versioning.
 set(SK_POKER_EVAL_VERSION_MAJOR 1)
-set(SK_POKER_EVAL_VERSION_MINOR 6)
+set(SK_POKER_EVAL_VERSION_MINOR 7)
 set(SK_POKER_EVAL_VERSION_PATCH 0)
 
 # Get the current commit.
@@ -41,5 +41,7 @@ add_subdirectory(lib/gtest-1.7.0)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 add_executable(eval_tests tests/five_eval_tests.cpp tests/seven_eval_tests.cpp)
+
 target_link_libraries(eval_tests gtest_main skpokereval)
 add_test(NAME GTests COMMAND eval_tests)
+

@@ -49,18 +49,13 @@ for i in xrange(1, 13):
 print "Key count is %i." % (len(keys),)
 print "Max key is %i." % (max_key,)
 
-side = 1  # Power of 2 to ultimately optimise hash key calculation.
-exp = 0
-while side*side <= max_key:
-    side <<= 1
-    exp += 1
-
+side = 128 # Power of 2 to ultimately optimise hash key calculation.
 print "Square will be of side %i." % (side,)
 
-square = [[-1]*side for i in xrange(side)]
+square = [[-1]*(512*side) for i in xrange(side)]
 
 for k in keys:
-    square[k & (side - 1)][k >> exp] = k
+    square[k % side][k / side] = k
 
 offset = [0]*((max_key / side) + 1)
 hash_table = [-1]*max_key
@@ -84,12 +79,10 @@ for i in xrange(0, len(offset)):
                 (i, j, hash_table_len)
             break
 
-f = open('./hash_table', 'w')
-f.write("%s\n" % (hash_table[0:hash_table_len],))
-f.close()
+with open('./hash_table_%s' % (side,), 'w') as f:
+    f.write("%s\n" % (hash_table[0:hash_table_len],))
 
-f = open('./offset', 'w')
-f.write("%s\n" % (offset,))
-f.close()
+with open('./offset_%s' % (side,), 'w') as f:
+    f.write("%s\n" % (offset,))
 
 print "Hash table has length %i." % (hash_table_len,)

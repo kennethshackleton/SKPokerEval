@@ -1,5 +1,10 @@
 ### Change Log
 
+#### 1.7.0
+
+* Reduce potential memory footprint by 40%.
+* Slight performance gains.
+
 #### 1.6.0
 
 * Optimise ranking flushes.

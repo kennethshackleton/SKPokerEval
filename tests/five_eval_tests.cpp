@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 #include <climits>
+#include <atomic>
+#include "Parallel.h"
 #include "../src/FiveEval.h"
 
 class FiveEvalTest : public ::testing::Test {
 protected:
   virtual void SetUp() {}
-
   virtual void TearDown() {}
-
   FiveEval const eval;
 };
 
@@ -292,9 +292,10 @@ TEST_F(FiveEvalTest, StraightFlush) {
 }
 
 TEST_F(FiveEvalTest, SevenCardHand) {
-  int five[5];
-  int seven[7];
-  for (int i = 6; i < 51; ++i) {
+  std::atomic<long> count(0);
+  auto const outer = [&](int const& i) {
+    int five[5];
+    int seven[7];
     seven[0] = i;
     for (int j = 5; j < i; ++j) {
       seven[1] = j;
@@ -334,12 +335,14 @@ TEST_F(FiveEvalTest, SevenCardHand) {
                                     << m << ", "
                                     << n << ", "
                                     << p << " is invalid.";
+                ++count;
               }
             }
           }
         }
       }
     }
-  }
+  };
+  ParallelFor(6, 52, outer);
+  ASSERT_EQ(133784560, count) << "Invalid number of seven card hands tested.";
 }
-
