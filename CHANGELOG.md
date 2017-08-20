@@ -2,7 +2,7 @@
 
 #### 1.7.0
 
-* Reduce potential memory footprint by 40%.
+* Reduce required memory footprint by 40%.
 * Slight performance gains.
 
 #### 1.6.0
