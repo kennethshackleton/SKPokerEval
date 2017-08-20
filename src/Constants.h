@@ -98,7 +98,7 @@
 #define MAX_FLUSH_CHECK_SUM (7*CLUB)
 
 // Bit masks
-#define NON_FLUSH_BIT_SHIFT 9
-#define SUIT_BIT_MASK ((1<<NON_FLUSH_BIT_SHIFT)-1)
+#define FLUSH_BIT_SHIFT 23
+#define FACE_BIT_MASK ((1 << FLUSH_BIT_SHIFT) - 1)
 
 #endif // SKPOKEREVAL_CONSTANTS_H_
