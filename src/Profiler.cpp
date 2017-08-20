@@ -26,6 +26,8 @@
 #include <iostream>
 #include <chrono>
 #include <limits>
+#include <vector>
+#include <array>
 
 template <class T>
 inline void doNotOptimiseAway(T&& datum) {
@@ -37,43 +39,31 @@ public:
   static double RandomAccessProfile(unsigned const count) {
     std::default_random_engine gen;
     std::uniform_int_distribution<int> dist(0, 51);
-    int const length = 28*count;
-    unsigned * const buffer = (unsigned *) malloc(length * sizeof(unsigned));
-    for (int i = 0; i < length; i += 7) {
+    std::vector<std::array<unsigned, 7>> buffer(count);
+    std::array<unsigned, 7> hand;
+    for (int i = 0; i < count; ++i) {
       int j = 0;
       while (j < 7) {
         unsigned const r = dist(gen);
         bool accept = true;
         for (int k = 0; k < j; ++k) {
-          if (buffer[i+k] == r) {
+          if (hand[k] == r) {
             accept = false;
             break;
           }
         }
-        if (accept) buffer[i+(j++)] = r;
+        if (accept) hand[j++] = r;
       }
+      buffer.push_back(hand);
     }
     auto const start = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < length; i += 28) {
+    for (auto const hand : buffer) {
       doNotOptimiseAway(
-        SevenEval::GetRank(buffer[i+21], buffer[i+22], buffer[i+23],
-          buffer[i+24], buffer[i+25], buffer[i+26], buffer[i+27])
-      );
-      doNotOptimiseAway(
-        SevenEval::GetRank(buffer[i], buffer[i+1], buffer[i+2],
-          buffer[i+3], buffer[i+4], buffer[i+5], buffer[i+6])
-      );
-      doNotOptimiseAway(
-        SevenEval::GetRank(buffer[i+7], buffer[i+8], buffer[i+9],
-          buffer[i+10], buffer[i+11], buffer[i+12], buffer[i+13])
-      );
-      doNotOptimiseAway(
-        SevenEval::GetRank(buffer[i+14], buffer[i+15], buffer[i+16],
-          buffer[i+17], buffer[i+18], buffer[i+19], buffer[i+20])
+        SevenEval::GetRank(hand[0], hand[1], hand[2], hand[3], hand[4],
+          hand[5], hand[6])
       );
     }
     auto const end = std::chrono::high_resolution_clock::now();
-    delete buffer;
     return 1e-6 * std::chrono::duration_cast<std::chrono::nanoseconds>(
       end - start).count();
   }
@@ -84,7 +74,7 @@ int main() {
   long const numberOfHands = 50000000L;
   auto fastest = std::numeric_limits<double>::max();
   for (int i = 0; i < 20; ++i) {
-    auto const profile = Profiler::RandomAccessProfile(numberOfHands / 4);
+    auto const profile = Profiler::RandomAccessProfile(numberOfHands);
     fastest = std::min(fastest, profile);
     std::cout << i << ": " << profile << " ms" << std::endl;
   }
