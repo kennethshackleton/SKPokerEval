@@ -31,7 +31,7 @@ The extraordinarily lucky aspect of this is that the maximum non-flush key we ha
 
 ## How has the project evolved?
 
-Taking v1.1 as the base line, the sampled relative throughput of random access has been seen to have changed as follows (a higher multiple is better).
+Taking v1.1 as the base line, the sampled relative throughput of random SevenEval access has been seen to have changed as follows (a higher multiple is better).
 
 | Version | Relative throughput | Reason                            |
 | ------- | ------------------: | :-------------------------------- |
