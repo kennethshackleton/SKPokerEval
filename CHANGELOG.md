@@ -7,7 +7,7 @@
 
 #### 1.6.0
 
-* Optimise ranking flushes.
+* Optimise ranking flushes by removing branching in this case.
 
 #### 1.5.0
 
