@@ -33,17 +33,17 @@ The extraordinarily lucky aspect of this is that the maximum non-flush key we ha
 
 Taking v1.1 as the base line, the sampled relative throughput of random access has been seen to have changed as follows (a higher multiple is better).
 
-| Version | Relative throughput |
-| ------- | ------------------: |
-| 1.1     |                1.00 |
-| 1.2     |                1.00 |
-| 1.3     |                1.00 |
-| 1.4     |                1.00 |
-| 1.4.1   |                1.00 |
-| 1.4.2   |                1.18 |
-| 1.5     |                1.18 |
-| 1.6     |                1.50 |
-| 1.7     |                1.53 |
+| Version | Relative throughput | Reason                            |
+| ------- | ------------------: | :-------------------------------- |
+| 1.1     |                1.00 |                                   |
+| 1.2     |                1.00 |                                   |
+| 1.3     |                1.00 |                                   |
+| 1.4     |                1.00 |                                   |
+| 1.4.1   |                1.00 |                                   |
+| 1.4.2   |                1.18 | Hashing.                          |
+| 1.5     |                1.18 |                                   |
+| 1.6     |                1.50 | Remove branching from flush case. |
+| 1.7     |                1.53 | Reduce the hash table.            |
 
 ## I want to contribute, how might I profile my change?
 
