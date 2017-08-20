@@ -38,13 +38,13 @@ public:
   static inline uint16_t GetRank(int i, int j, int k, int m, int n, int p,
       int q) {
     // Create a 7-card hand key by adding up each of the card keys.
-    uint_fast32_t key = card[i] + card[j] + card[k] + card[m] + card[n] +
+    auto key = card[i] + card[j] + card[k] + card[m] + card[n] +
       card[p] + card[q];
     if (TDoFlushCheck) {
-      int_fast8_t const suit = flush_check[(key & SUIT_BIT_MASK)];
+      auto const suit = flush_check[(key & SUIT_BIT_MASK)];
       if (NOT_A_FLUSH != suit) {
         // Generate a flush key, and look up the rank.
-        uint_fast16_t const * const s = suit_kronecker[suit];
+        auto const * const s = suit_kronecker[suit];
         return flush_ranks[s[i] + s[j] + s[k] + s[m] + s[n] + s[p] + s[q]];
       }
     }
