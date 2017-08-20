@@ -294,6 +294,7 @@ TEST_F(FiveEvalTest, StraightFlush) {
 TEST_F(FiveEvalTest, SevenCardHand) {
   std::atomic<long> count(0);
   auto const outer = [&](int const& i) {
+    long inner_count = 0;
     int five[5];
     int seven[7];
     seven[0] = i;
@@ -335,13 +336,14 @@ TEST_F(FiveEvalTest, SevenCardHand) {
                                     << m << ", "
                                     << n << ", "
                                     << p << " is invalid.";
-                ++count;
+                ++inner_count;
               }
             }
           }
         }
       }
     }
+    count += inner_count;
   };
   ParallelFor(6, 52, outer);
   ASSERT_EQ(133784560, count) << "Invalid number of seven card hands tested.";
