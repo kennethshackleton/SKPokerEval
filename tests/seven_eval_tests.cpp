@@ -14,6 +14,7 @@ protected:
 TEST_F(SevenEvalTest, CompareWithFiveEval) {
   std::atomic<long> count(0);
   auto const outer = [&](int const& i) {
+    long inner_count = 0;
     for (int j = i+1; j < 47; ++j) {
       for (int k = j+1; k < 48; ++k) {
         for (int l = k+1; l < 49; ++l) {
@@ -31,13 +32,14 @@ TEST_F(SevenEvalTest, CompareWithFiveEval) {
                                                  << n << ", "
                                                  << p
                                                  << " differ.";
-                ++count;
+                ++inner_count;
               }
             }
           }
         }
       }
     }
+    count += inner_count;
   };
   ParallelFor(0, 46, outer);
   ASSERT_EQ(133784560, count) << "Invalid number of seven card hands tested.";
