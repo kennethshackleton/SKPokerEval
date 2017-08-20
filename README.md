@@ -29,6 +29,22 @@ Similarly, we assign the integer values 0, 1, 8 and 57 for spade, heart, diamond
 
 The extraordinarily lucky aspect of this is that the maximum non-flush key we have, 7825759, is a 23-bit integer (note 2^23 = 8388608) and the largest suit key we find, 57*7 = 399, is a 9-bit integer (note 2^9 = 512). If we bit-shift a card's non-flush face value and add to this its flush check to make a card key in advance, when we aggregate the resulting card keys over a given 7-card hand we generate a 23+9 = 32-bit integer key for the whole hand. This integer key can only just be accommodated on a 32-bit machine and yet still carries enough information to decide if we're looking at a flush and if not to then look up the rank of the hand.
 
+## How has the project evolved?
+
+Taking v1.1 as the base line, sampled relative throughput has been seen to have changed as follows where a higher multiple is better.
+
+| Version | Relative throughput |
+| ------- | ------------------: |
+| 1.1     |                1.00 |
+| 1.2     |                1.00 |
+| 1.3     |                1.00 |
+| 1.4     |                1.00 |
+| 1.4.1   |                1.00 |
+| 1.4.2   |                1.18 |
+| 1.5     |                1.18 |
+| 1.6     |                1.50 |
+| 1.7     |                1.53 |
+
 ## I want to contribute, how might I profile my change?
 
 The project contains a [profiler](src/Profiler.cpp) which might be used to help benchmark your changes.
