@@ -35,10 +35,10 @@ Taking v1.1 as the base line, the sampled relative throughput of random SevenEva
 
 | Version | Relative throughput | Reason                            |
 | ------- | ------------------: | :-------------------------------- |
-| [1.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.1)     |                <pre>1.00</pre> |                                   |
-| [1.4.2](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.4.2) |                <pre>1.18</pre> | Hashing.                          |
-| [1.6](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.6)     |                <pre>1.50</pre> | Remove branching from flush case. |
-| [1.7](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.7)     |                <pre>1.53</pre> | Reduce the hash table.            |
+| [1.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.1)     |                1.00 |                                   |
+| [1.4.2](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.4.2) |                1.18 | Hashing.                          |
+| [1.6](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.6)     |                1.50 | Remove branching from flush case. |
+| [1.7](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.7)     |                1.53 | Reduce the hash table.            |
 
 ## I want to contribute, how might I profile my change?
 
