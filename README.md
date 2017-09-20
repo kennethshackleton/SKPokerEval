@@ -19,6 +19,8 @@ int main() {
 }
 ```
 
+The implementation being immutable is already thread-safe and there is no initialisation time.
+
 ## How does it work?
 
 We exploit a key-scheme that gives us just enough uniqueness to correctly identify the integral rank of any 7-card hand, where the greater this rank is the better the hand we hold and two hands of the same rank always draw. We require a memory footprint of 250kB and typically six additions to rank a hand.
