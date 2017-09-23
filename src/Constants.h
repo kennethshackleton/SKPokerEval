@@ -34,6 +34,7 @@
 #define INDEX_HEART 1
 #define INDEX_DIAMOND 2
 #define INDEX_CLUB 3
+#define NOT_A_SUIT (-1)
 
 #define TWO_FIVE 0
 #define THREE_FIVE 1
@@ -96,12 +97,8 @@
 
 #define MAX_FLUSH_CHECK_SUM (7*CLUB)
 
-// Used in flush checking. These must be distinct from each of the suits.
-#define UNVERIFIED (-1)
-#define NOT_A_FLUSH (-2)
-
 // Bit masks
-#define NON_FLUSH_BIT_SHIFT 9
-#define SUIT_BIT_MASK ((1<<NON_FLUSH_BIT_SHIFT)-1)
+#define FLUSH_BIT_SHIFT 23
+#define FACE_BIT_MASK ((1 << FLUSH_BIT_SHIFT) - 1)
 
 #endif // SKPOKEREVAL_CONSTANTS_H_

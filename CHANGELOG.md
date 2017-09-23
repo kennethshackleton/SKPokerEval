@@ -1,13 +1,18 @@
 ### Change Log
 
+#### 1.7.1
+
+* Reduce rank hash table by 9%.
+* Slight performance gains.
+
 #### 1.7.0
 
-* Reduce potential memory footprint by 40%.
+* Reduce required memory footprint by 40%.
 * Slight performance gains.
 
 #### 1.6.0
 
-* Optimise ranking flushes.
+* Optimise ranking flushes by removing branching in this case.
 
 #### 1.5.0
 
