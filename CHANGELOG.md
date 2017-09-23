@@ -1,5 +1,10 @@
 ### Change Log
 
+#### 1.7.1
+
+* Reduce rank hash table by 9%.
+* Slight performance gains.
+
 #### 1.7.0
 
 * Reduce required memory footprint by 40%.
