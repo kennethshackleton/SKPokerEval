@@ -24,6 +24,8 @@
 # See "Fundamental Study Perfect Hashing" by Czech, Havas, Majewski,
 # Theoretical Computer Science 182 (1997) 1-143.
 
+from rank import rank
+
 val = [0, 1, 5, 22, 98, 453, 2031, 8698, 22854, 83661, 262349, 636345, 1479181]
 keys = set([])
 max_key = 0
@@ -33,14 +35,11 @@ for i in xrange(1, 13):
         for k in xrange(1, j+1):
             for l in xrange(0, k+1):
                 for m in xrange(0, l+1):
-                    if not m < i:
-                        break
+                    if not m < i: break
                     for n in xrange(0, m+1):
-                        if not n < j:
-                            break
+                        if not n < j: break
                         for p in xrange(0, n+1):
-                            if not p < k:
-                                break
+                            if not p < k: break
                             key = val[i] + val[j] + val[k] + val[l] + val[m] +\
                                 val[n] + val[p]
                             keys.add(key)
@@ -55,34 +54,38 @@ print "Square will be of side %i." % (side,)
 square = [[-1]*(512*side) for i in xrange(side)]
 
 for k in keys:
-    square[k % side][k / side] = k
+    square[k % side][k / side] = rank(k)
 
 offset = [0]*((max_key / side) + 1)
-hash_table = [-1]*max_key
-hash_table_len = 0
+ranks = [-1]*max_key
+length = 0
 
 for i in xrange(0, len(offset)):
-    for j in xrange(0, len(hash_table)-side):
+    for j in xrange(0, len(ranks)-side):
         collision = False
         for k in xrange(0, side):
-            if hash_table[j+k] != -1 and square[k][i] != -1:
-                collision = True
-                break
+            s = square[k][i]
+            h = ranks[j+k]
+            collision = (s != -1 and h != -1 and s != h)
+            if collision: break
         if not collision:
             offset[i] = j
             for k in xrange(0, side):
-                x = square[k][i]
-                if x != -1:
-                    hash_table[j+k] = x
-            hash_table_len = max(hash_table_len, j+side)
-            print "Offset of row %i is %i (length %i)." %\
-                (i, j, hash_table_len)
+                s = square[k][i]
+                if s != -1:
+                    n = j+k
+                    ranks[n] = s
+                    length = max(length, n)
+            print "Offset of row %i is %i (length %i)." % (i, j, length)
             break
 
-with open('./hash_table_%s' % (side,), 'w') as f:
-    f.write("%s\n" % (hash_table[0:hash_table_len],))
+for i in xrange(0, length):
+    if ranks[i] == -1: ranks[i] = 0
+
+with open('./ranks_%s' % (side,), 'w') as f:
+    f.write("%s\n" % (ranks[0:length],))
 
 with open('./offset_%s' % (side,), 'w') as f:
     f.write("%s\n" % (offset,))
 
-print "Hash table has length %i." % (hash_table_len,)
+print "Hash table has length %i." % (length,)
