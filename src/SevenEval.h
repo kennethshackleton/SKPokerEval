@@ -35,8 +35,8 @@ public:
   // Two such integers of the same residue modulo 4 correspond to the same suit.
   // The higher the rank the better the hand. Two hands of equal rank tie.
   template<bool TDoFlushCheck = true>
-  static inline uint16_t GetRank(int i, int j, int k, int m, int n, int p,
-      int q) {
+  static inline uint16_t GetRank(uint8_t i, uint8_t j, uint8_t k, uint8_t m,
+      uint8_t n, uint8_t p, uint8_t q) {
     // Create a 7-card hand key by adding up each of the card keys.
     auto const key = card[i] + card[j] + card[k] + card[m] + card[n] +
       card[p] + card[q];
