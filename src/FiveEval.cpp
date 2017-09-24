@@ -97,8 +97,8 @@ mFlushRankPtr(new short unsigned[MAX_FIVE_FLUSH_KEY_INT+1]) {
         for (int l = 1; l < k ; ++l) {
           for (int m = 0; m < l; ++m) {
             if (!(i-m == 4 || (i == 12 && j == 3))) {
-              mFlushRankPtr[face_flush[i] + face_flush[j] + face_flush[k] +
-                            face_flush[l] + face_flush[m]] = n++;
+              mFlushRankPtr[face_flush[i] | face_flush[j] | face_flush[k] |
+                            face_flush[l] | face_flush[m]] = n++;
             }
           }
         }
@@ -125,13 +125,13 @@ mFlushRankPtr(new short unsigned[MAX_FIVE_FLUSH_KEY_INT+1]) {
   }
   
   // Low straight flush.
-  mFlushRankPtr[face_flush[0] + face_flush[1] + face_flush[2] +
-                face_flush[3] + face_flush[12]] = n++;
+  mFlushRankPtr[face_flush[0] | face_flush[1] | face_flush[2] |
+                face_flush[3] | face_flush[12]] = n++;
   
   // Usual straight flush.
   for (int i = 0; i < 9; ++i) {
-    mFlushRankPtr[face_flush[i] + face_flush[i+1] + face_flush[i+2] +
-                  face_flush[i+3] + face_flush[i+4]] = n++;
+    mFlushRankPtr[face_flush[i] | face_flush[i+1] | face_flush[i+2] |
+                  face_flush[i+3] | face_flush[i+4]] = n++;
   }
 }
 
@@ -147,10 +147,10 @@ short unsigned FiveEval::GetRank(int const card_one, int const card_two,
       (mDeckcardsSuit[card_one] == mDeckcardsSuit[card_three]) &&
       (mDeckcardsSuit[card_one] == mDeckcardsSuit[card_four]) &&
       (mDeckcardsSuit[card_one] == mDeckcardsSuit[card_five])) {
-    return mFlushRankPtr[mDeckcardsFlush[card_one] +
-                         mDeckcardsFlush[card_two] +
-                         mDeckcardsFlush[card_three] +
-                         mDeckcardsFlush[card_four] +
+    return mFlushRankPtr[mDeckcardsFlush[card_one] |
+                         mDeckcardsFlush[card_two] |
+                         mDeckcardsFlush[card_three] |
+                         mDeckcardsFlush[card_four] |
                          mDeckcardsFlush[card_five]];
   }
   return mRankPtr[mDeckcardsFace[card_one] +
