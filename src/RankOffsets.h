@@ -22,9 +22,7 @@
 
 #include <cstdint>
 
-// TODO While the rank hash array has size less than 1 << 16 we can use
-// uint16_t here. However using uint32_t seems to be a modest performance win.
-uint32_t const offsets[61139] = {
+uint16_t const offsets[61139] = {
   0, 127, 245, 333, 459, 568, 627, 724, 849, 587, 900, 992, 1008, 30, 1071,
   1045, 1196, 1324, 1412, 1487, 1591, 1662, 253, 1768, 1758, 123, 1830, 855,
   552, 0, 1918, 1857, 1984, 2076, 2135, 2150, 2238, 593, 1402, 2260, 226, 13,
