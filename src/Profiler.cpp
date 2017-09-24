@@ -36,15 +36,15 @@ class Profiler {
 public:
   static double RandomAccessProfile(unsigned const count) {
     std::default_random_engine gen;
-    std::uniform_int_distribution<int> dist(0, 51);
+    std::uniform_int_distribution<uint8_t> dist(0, 51);
     int const length = 28*count;
-    unsigned * const buffer = (unsigned *) malloc(length * sizeof(unsigned));
+    uint8_t * const buffer = (uint8_t *) malloc(length * sizeof(uint8_t));
     for (int i = 0; i < length; i += 7) {
-      int j = 0;
+      uint8_t j = 0;
       while (j < 7) {
-        unsigned const r = dist(gen);
+        uint8_t const r = dist(gen);
         bool accept = true;
-        for (int k = 0; k < j; ++k) {
+        for (uint8_t k = 0; k < j; ++k) {
           if (buffer[i+k] == r) {
             accept = false;
             break;
