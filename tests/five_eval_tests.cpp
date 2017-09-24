@@ -295,39 +295,39 @@ TEST_F(FiveEvalTest, SevenCardHand) {
   std::atomic<long> count(0);
   auto const outer = [&](int const& i) {
     long inner_count = 0;
-    int five[5];
-    int seven[7];
+    uint8_t five[5];
+    uint8_t seven[7];
     seven[0] = i;
-    for (int j = 5; j < i; ++j) {
+    for (uint8_t j = 5; j < i; ++j) {
       seven[1] = j;
-      for (int k = 4; k < j; ++k) {
+      for (uint8_t k = 4; k < j; ++k) {
         seven[2] = k;
-        for (int l = 3; l < k; ++l) {
+        for (uint8_t l = 3; l < k; ++l) {
           seven[3] = l;
-          for (int m = 2; m < l; ++m) {
+          for (uint8_t m = 2; m < l; ++m) {
             seven[4] = m;
-            for (int n = 1; n < m; ++n) {
+            for (uint8_t n = 1; n < m; ++n) {
               seven[5] = n;
-              for (int p = 0; p < n; ++p) {
+              for (uint8_t p = 0; p < n; ++p) {
                 seven[6] = p;
-                short unsigned rbf = 0;
-                int v = 0;
-                for (int x = 1; x < 7; ++x) {
-                  for (int y = 0; y < x; ++y) {
+                int rbf = 0;
+                uint8_t v = 0;
+                for (uint8_t x = 1; x < 7; ++x) {
+                  for (uint8_t y = 0; y < x; ++y) {
                     v = 0;
-                    for (int z = 0; z < 7; ++z) {
+                    for (uint8_t z = 0; z < 7; ++z) {
                       if (z != x && z != y) {
                         five[v++] = seven[z];
                       }
                     }
-                    short unsigned const rank = eval.GetRank(five[0], five[1],
+                    int const rank = eval.GetRank(five[0], five[1],
                         five[2], five[3], five[4]);
                     if (rbf < rank) {
                       rbf = rank;
                     }
                   }
                 }
-                short const rbs = eval.GetRank(i, j, k, l, m, n, p);
+                auto const rbs = eval.GetRank(i, j, k, l, m, n, p);
                 ASSERT_EQ(rbf, rbs) << "Rank " << rbs << " at "
                                     << i << ", "
                                     << j << ", "
