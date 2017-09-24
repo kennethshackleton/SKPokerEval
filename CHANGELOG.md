@@ -1,5 +1,10 @@
 ### Change Log
 
+#### 1.8
+
+* Index cards by bytes.
+* Observed performance gains of about 23%.
+
 #### 1.7.1
 
 * Reduce rank hash table by 9%.
