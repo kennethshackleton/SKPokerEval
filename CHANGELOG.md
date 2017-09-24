@@ -1,5 +1,11 @@
 ### Change Log
 
+#### 1.8.1
+
+* Simplify flush rank key and look-up.
+* Accept smaller non-flush rank offset table.
+* Observed performance gains of about 6%.
+
 #### 1.8
 
 * Index cards by bytes.

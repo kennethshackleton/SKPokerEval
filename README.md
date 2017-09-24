@@ -35,14 +35,15 @@ The extraordinarily lucky aspect of this is that the maximum non-flush key we ha
 
 Taking v1.1 as the base line, the sampled relative throughput of random [SevenEval](https://github.com/kennethshackleton/SKPokerEval/blob/develop/src/SevenEval.h) access has been seen to have changed as follows (a higher multiple is better).
 
-| Version | Relative throughput | Reason                            |
-| ------- | ------------------: | :-------------------------------- |
-| [1.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.1)     |                1.00 |                                   |
-| [1.4.2](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.4.2) |                1.18 | Hashing.                          |
-| [1.6](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.6)     |                1.50 | Remove branching from flush case. |
-| [1.7](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.7)     |                1.53 | Reduce the hash table.            |
-| [1.7.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.7.1) |                1.57 | Reduce the rank hash table.       |
-| [1.8](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.8)     |                1.93 | Index cards by bytes.             |
+| Version                                                                       | Relative throughput | Reason                                    |
+| ----------------------------------------------------------------------------- | ------------------: | :---------------------------------------- |
+| [1.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.1)     |                1.00 |                                           |
+| [1.4.2](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.4.2) |                1.18 | Hashing.                                  |
+| [1.6](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.6)     |                1.50 | Remove branching from flush case.         |
+| [1.7](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.7)     |                1.53 | Reduce the hash table.                    |
+| [1.7.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.7.1) |                1.57 | Reduce the rank hash table.               |
+| [1.8](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.8)     |                1.93 | Index cards by bytes.                     |
+| [1.8.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.8.1) |                2.04 | Simplify flush key. Smaller offset table. |
 
 ## I want to contribute, how might I profile my change?
 
