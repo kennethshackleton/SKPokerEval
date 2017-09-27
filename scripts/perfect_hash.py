@@ -72,22 +72,23 @@ sorted_rows = sorted(
     reverse=True)
 
 for i in xrange(0, len(offset)):
+    z = sorted_rows[i]
     for j in xrange(0, len(ranks)-side):
         collision = False
         for k in xrange(0, side):
-            s = square[k][sorted_rows[i]]
+            s = square[k][z]
             h = ranks[j+k]
             collision = (s != -1 and h != -1 and s != h)
             if collision: break
         if not collision:
-            offset[sorted_rows[i]] = j
+            offset[z] = j
             for k in xrange(0, side):
-                s = square[k][sorted_rows[i]]
+                s = square[k][z]
                 if s != -1:
                     n = j+k
                     ranks[n] = s
                     length = max(length, n+1)
-            print "Offset of row %i is %i (length %i)." % (sorted_rows[i], j, length)
+            print "Offset of row %i is %i (length %i)." % (z, j, length)
             break
 
 for i in xrange(0, length):
