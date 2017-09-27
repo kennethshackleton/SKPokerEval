@@ -86,7 +86,7 @@ for i in xrange(0, len(offset)):
                 if s != -1:
                     n = j+k
                     ranks[n] = s
-                    length = max(length, n) + 1
+                    length = max(length, n+1)
             print "Offset of row %i is %i (length %i)." % (sorted_rows[i], j, length)
             break
 
