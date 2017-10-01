@@ -19,7 +19,7 @@ int main() {
 }
 ```
 
-The implementation being immutable is already thread-safe and there is no initialisation time.
+The implementation being immutable is already thread-safe. There is no initialisation time.
 
 ## How does it work?
 
