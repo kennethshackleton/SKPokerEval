@@ -49,8 +49,9 @@ public:
       }
     }
     // Tear off the non-flush key strip, and look up the rank.
-    return rank_hash[offsets[(key & FACE_BIT_MASK) >> RANK_OFFSET_SHIFT]
-      + (key & RANK_HASH_MOD)];
+    auto const hash = FACE_BIT_MASK & (unsigned)(31L * key);
+    return rank_hash[offsets[hash >> RANK_OFFSET_SHIFT] +
+      (hash & RANK_HASH_MOD)];
   }
 private:
   SevenEval() {}

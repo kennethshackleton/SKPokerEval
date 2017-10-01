@@ -23,7 +23,7 @@ The implementation being immutable is already thread-safe and there is no initia
 
 ## How does it work?
 
-We exploit a key-scheme that gives us just enough uniqueness to correctly identify the integral rank of any 7-card hand, where the greater this rank is the better the hand we hold and two hands of the same rank always draw. We require a memory footprint of 230kB and typically six additions to rank a hand.
+We exploit a key-scheme that gives us just enough uniqueness to correctly identify the integral rank of any 7-card hand, where the greater this rank is the better the hand we hold and two hands of the same rank always draw. We require a memory footprint just shy of 140kB and typically six additions to rank a hand.
 
 To start with we computed by brute force the first thirteen non-negative integers such that the formal sum of exactly seven with each taken at most four times is unique among all such sums: 0, 1, 5, 22, 98, 453, 2031, 8698, 22854, 83661, 262349, 636345 and 1479181. A valid sum might be 0+0+1+1+1+1+5 = 9 or 0+98+98+453+98+98+1 = 846, but invalid sum expressions include 0+262349+0+0+0+1 (too few summands), 1+1+5+22+98+453+2031+8698 (too many summands), 0+1+5+22+98+453+2031+8698 (again too many summands, although 1+5+22+98+453+2031+8698 is a legitimate expression) and 1+1+1+1+1+98+98 (too many 1's). We assign these integers as the card face values and add these together to generate a key for any non-flush 7-card hand. The largest non-flush key we see is 7825759, corresponding to any of the four quad-of-aces-full-of-kings.
 
