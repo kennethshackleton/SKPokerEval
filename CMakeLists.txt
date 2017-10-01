@@ -5,8 +5,8 @@ project(${PROJECT_NAME})
 
 # Versioning.
 set(SK_POKER_EVAL_VERSION_MAJOR 1)
-set(SK_POKER_EVAL_VERSION_MINOR 8)
-set(SK_POKER_EVAL_VERSION_PATCH 1)
+set(SK_POKER_EVAL_VERSION_MINOR 9)
+set(SK_POKER_EVAL_VERSION_PATCH 0)
 
 # Get the current commit.
 execute_process(

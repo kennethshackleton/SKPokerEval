@@ -1,5 +1,9 @@
 ### Change Log
 
+#### 1.9
+
+* Reduce hash table by 30%, to under 140kB.
+
 #### 1.8.1
 
 * Simplify flush rank key and look-up.
