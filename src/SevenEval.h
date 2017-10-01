@@ -37,7 +37,6 @@ public:
   template<bool TDoFlushCheck = true>
   static inline uint16_t GetRank(uint8_t i, uint8_t j, uint8_t k, uint8_t m,
       uint8_t n, uint8_t p, uint8_t q) {
-    // Create a 7-card hand key by adding up each of the card keys.
     auto const key = card[i] + card[j] + card[k] + card[m] + card[n] +
       card[p] + card[q];
     if (TDoFlushCheck) {
@@ -48,7 +47,6 @@ public:
         return flush_ranks[s[i] | s[j] | s[k] | s[m] | s[n] | s[p] | s[q]];
       }
     }
-    // Tear off the non-flush key strip, and look up the rank.
     auto const hash = FACE_BIT_MASK & (unsigned)(31L * key);
     return rank_hash[offsets[hash >> RANK_OFFSET_SHIFT] +
       (hash & RANK_HASH_MOD)];
