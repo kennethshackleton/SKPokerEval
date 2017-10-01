@@ -42,7 +42,6 @@ public:
     if (TDoFlushCheck) {
       auto const suit = flush_check[key >> FLUSH_BIT_SHIFT];
       if (NOT_A_SUIT != suit) {
-        // Generate a flush key, and look up the rank.
         auto const * const s = suit_kronecker[suit];
         return flush_ranks[s[i] | s[j] | s[k] | s[m] | s[n] | s[p] | s[q]];
       }
