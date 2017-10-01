@@ -48,44 +48,67 @@ for i in xrange(1, 13):
 print "Key count is %i." % (len(keys),)
 print "Max key is %i." % (max_key,)
 
-side = 128 # Power of 2 to ultimately optimise hash key calculation.
-print "Square will be of side %i." % (side,)
+M = 31
+power = 9
+side = (1 << power)
+bits = 23
+print "Table will be of side %i." % (side,)
 
-square = [[-1]*(512*side) for i in xrange(side)]
+NOT_A_VALUE = -1
+
+square = [[NOT_A_VALUE]*(600*side) for i in xrange(side)]
+
+offset = [0]*(1 << (bits - power))
+ranks = [NOT_A_VALUE]*max_key
+
+diffused_keys = {}
+
+def diffuse(k):
+    k *= M
+    return k & ((1 << bits) - 1)
 
 for k in keys:
-    square[k % side][k / side] = rank(k)
+    d = diffuse(k)
+    assert d not in diffused_keys
+    diffused_keys[diffuse(k)] = k
 
-offset = [0]*((max_key / side) + 1)
-ranks = [-1]*max_key
+for k, v in diffused_keys.iteritems():
+    r = k / side
+    assert square[k % side][r] == NOT_A_VALUE
+    square[k % side][r] = rank(v)
+
 length = 0
 
 for i in xrange(0, len(offset)):
-    for j in xrange(0, len(ranks)-side):
+    for j in xrange(0, len(ranks)):
         collision = False
         for k in xrange(0, side):
             s = square[k][i]
             h = ranks[j+k]
-            collision = (s != -1 and h != -1 and s != h)
+            collision = (s != NOT_A_VALUE and h != NOT_A_VALUE and s != h)
             if collision: break
         if not collision:
             offset[i] = j
             for k in xrange(0, side):
                 s = square[k][i]
-                if s != -1:
+                if s != NOT_A_VALUE:
                     n = j+k
                     ranks[n] = s
-                    length = max(length, n)
+                    length = max(length, n+1)
             print "Offset of row %i is %i (length %i)." % (i, j, length)
             break
 
-for i in xrange(0, length):
-    if ranks[i] == -1: ranks[i] = 0
+for k in keys:
+    d = diffuse(k)
+    assert rank(k) == ranks[offset[d / side] + (d % side)]
 
-with open('./ranks_%s' % (side,), 'w') as f:
+for i in xrange(0, length):
+    if ranks[i] == NOT_A_VALUE: ranks[i] = 0
+
+with open('./ranks_%i_%i' % (side, M,), 'w') as f:
     f.write("%s\n" % (ranks[0:length],))
 
-with open('./offset_%s' % (side,), 'w') as f:
+with open('./offset_%i_%i' % (side, M,), 'w') as f:
     f.write("%s\n" % (offset,))
 
-print "Hash table has length %i." % (length,)
+print "Accepted hash table with length %i." % (length,)
