@@ -2,7 +2,7 @@
 
 #### 1.9
 
-* Reduce hash table by 40%, to under 140kB.
+* Reduce memory footprint by 40%, to under 140kB.
 
 #### 1.8.1
 
