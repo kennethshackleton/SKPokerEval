@@ -46,7 +46,7 @@ public:
         return flush_ranks[s[i] | s[j] | s[k] | s[m] | s[n] | s[p] | s[q]];
       }
     }
-    auto const hash = FACE_BIT_MASK & (unsigned)(31L * key);
+    auto const hash = FACE_BIT_MASK & (uint32_t)(31L * key);
     return rank_hash[offsets[hash >> RANK_OFFSET_SHIFT] +
       (hash & RANK_HASH_MOD)];
   }
