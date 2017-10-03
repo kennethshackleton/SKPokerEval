@@ -70,7 +70,7 @@ def diffuse(k):
 for k in keys:
     d = diffuse(k)
     assert d not in diffused_keys
-    diffused_keys[diffuse(k)] = k
+    diffused_keys[d] = k
 
 for k, v in diffused_keys.iteritems():
     r = k / side
