@@ -46,6 +46,8 @@ Taking v1.1 as the base line, the sampled relative throughput of random [SevenEv
 | [1.8.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.8.1) |                2.04 | Simplify flush key. Smaller offset table. |
 | [1.9](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.9)     |                2.04 | Reduce the hash table.                    |
 
+At some point the cost of the sample for-loop iteration becomes relatively significant.
+
 ## I want to contribute, how might I profile my change?
 
 The project contains a [profiler](src/Profiler.cpp) which might be used to help benchmark your changes.
