@@ -2,7 +2,7 @@
 #include <climits>
 #include <atomic>
 #include "Parallel.h"
-#include "../src/FiveEval.h"
+#include "FiveEval.h"
 
 class FiveEvalTest : public ::testing::Test {
 protected:
