@@ -153,7 +153,7 @@ TEST_F(FiveEvalTest, WorstStraightBeatsBestTriple) {
   // Triple Aces, King, Queen.
   int const rank_of_best_triple = eval.GetRank(0, 1, 2, 4, 8);
   // Straight Ace low.
-  int const rank_of_worst_straight = eval.GetRank(33, 36, 40, 44, 48);
+  int const rank_of_worst_straight = eval.GetRank(0, 48, 45, 42, 39);
   ASSERT_LT(rank_of_best_triple, rank_of_worst_straight);
 }
 
