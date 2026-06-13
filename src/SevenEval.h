@@ -41,7 +41,7 @@ public:
       card[p] + card[q];
     if (TDoFlushCheck) {
       auto const suit = flush_check[key >> FLUSH_BIT_SHIFT];
-      if (NOT_A_SUIT != suit) {
+      if (NOT_A_SUIT != suit) [[unlikely]] {
         auto * const s = suit_kronecker[suit];
         return flush_ranks[s[i] | s[j] | s[k] | s[m] | s[n] | s[p] | s[q]];
       }
