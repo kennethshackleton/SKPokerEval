@@ -42,11 +42,11 @@ public:
     if (TDoFlushCheck) {
       auto const suit = flush_check[key >> FLUSH_BIT_SHIFT];
       if (NOT_A_SUIT != suit) [[unlikely]] {
-        auto * const s = suit_kronecker[suit];
+        auto const& s = suit_kronecker[suit];
         return flush_ranks[s[i] | s[j] | s[k] | s[m] | s[n] | s[p] | s[q]];
       }
     }
-    auto const hash = FACE_BIT_MASK & (uint32_t)(31 * (uint64_t) key);
+    auto const hash = FACE_BIT_MASK & (uint32_t)(6019237u * (uint64_t) key);
     return rank_hash[offsets[hash >> RANK_OFFSET_SHIFT] +
       (hash & RANK_HASH_MOD)];
   }
