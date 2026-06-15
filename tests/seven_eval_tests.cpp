@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <atomic>
 #include "Parallel.h"
-#include "../src/FiveEval.h"
+#include "FiveEval.h"
 #include "../src/SevenEval.h"
 
 class SevenEvalTest : public ::testing::Test {

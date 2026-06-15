@@ -20,7 +20,7 @@
 #ifndef SKPOKEREVAL_FIVEEVAL_H
 #define SKPOKEREVAL_FIVEEVAL_H
 
-#include "Constants.h"
+#include "../src/Constants.h"
 #include <cstdint>
 
 class FiveEval {

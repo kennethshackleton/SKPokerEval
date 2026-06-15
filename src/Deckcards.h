@@ -23,7 +23,7 @@
 #include "Constants.h"
 #include <cstdint>
 
-uint_fast32_t const card[DECK_SIZE] = {
+uint32_t const card[DECK_SIZE] = {
   ACE + (SPADE << FLUSH_BIT_SHIFT),
   ACE + (HEART << FLUSH_BIT_SHIFT),
   ACE + (DIAMOND << FLUSH_BIT_SHIFT),
@@ -106,7 +106,7 @@ uint_fast8_t const suit[DECK_SIZE] = {
   INDEX_SPADE, INDEX_HEART, INDEX_DIAMOND, INDEX_CLUB
 };
 
-uint_fast16_t const suit_kronecker[NUMBER_OF_SUITS][DECK_SIZE] = {
+uint16_t const suit_kronecker[NUMBER_OF_SUITS][DECK_SIZE] = {
   {
     ACE_FLUSH,   0, 0, 0,
     KING_FLUSH,  0, 0, 0,
