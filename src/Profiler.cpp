@@ -28,8 +28,8 @@
 #include <limits>
 
 template <class T>
-inline void doNotOptimiseAway(T&& datum) {
-  asm volatile("" : "+r"(datum));
+inline void doNotOptimiseAway(T const& datum) {
+  asm volatile("" : : "r,m"(datum) : "memory");
 }
 
 class Profiler {
@@ -77,6 +77,26 @@ public:
     return 1e-6 * std::chrono::duration_cast<std::chrono::nanoseconds>(
       end - start).count();
   }
+
+  static double SequentialBatchProfile() {
+    uint64_t sink = 0;
+
+    auto const start = std::chrono::high_resolution_clock::now();
+    for (uint8_t c0 = 0; c0 < 52; ++c0)
+      for (uint8_t c1 = c0 + 1; c1 < 52; ++c1)
+        for (uint8_t c2 = c1 + 1; c2 < 52; ++c2)
+          for (uint8_t c3 = c2 + 1; c3 < 52; ++c3)
+            for (uint8_t c4 = c3 + 1; c4 < 52; ++c4)
+              for (uint8_t c5 = c4 + 1; c5 < 52; ++c5)
+                SevenEval::GetRankBatch(c0, c1, c2, c3, c4, c5,
+                  static_cast<uint8_t>(c5 + 1), static_cast<uint8_t>(52),
+                  [&sink](size_t, uint16_t rank) { sink += rank; });
+
+    auto const end = std::chrono::high_resolution_clock::now();
+    doNotOptimiseAway(sink);
+    return 1e-6 * std::chrono::duration_cast<std::chrono::nanoseconds>(
+      end - start).count();
+  }
 };
 
 int main() {
@@ -92,6 +112,21 @@ int main() {
   if (fastest > 0.0) {
       double const handsPerSecond = (numberOfHands * 1000L) / fastest;
       std::cout << "Best random access rate: " << handsPerSecond
+        << " hands/sec" << std::endl;
+  }
+
+  std::cout << "Profiling SevenEval sequential GetRankBatch..." << std::endl;
+  uint64_t const sequentialHandCount = 133784560ULL;
+  auto fastestBatch = std::numeric_limits<double>::max();
+  for (int i = 0; i < 20; ++i) {
+    auto const profile = Profiler::SequentialBatchProfile();
+    fastestBatch = std::min(fastestBatch, profile);
+    std::cout << i << ": " << profile << " ms" << std::endl;
+  }
+  std::cout << "Best sequential GetRankBatch time: " << fastestBatch << " ms" << std::endl;
+  if (fastestBatch > 0.0) {
+      double const handsPerSecond = (sequentialHandCount * 1000.0) / fastestBatch;
+      std::cout << "Best sequential GetRankBatch rate: " << handsPerSecond
         << " hands/sec" << std::endl;
   }
 }
