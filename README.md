@@ -53,7 +53,7 @@ At some point the cost of the sample for-loop iteration becomes relatively signi
 The project contains a [profiler](src/Profiler.cpp) which might be used to help benchmark your changes.
 
 ```bash
-g++ -c -std=c++14 -O3 Profiler.cpp
+g++ -c -std=c++17 -O3 Profiler.cpp
 g++ -o profile Profiler.o
 ./profile
 ```

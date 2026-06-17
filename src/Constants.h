@@ -35,6 +35,7 @@
 #define INDEX_DIAMOND 2
 #define INDEX_CLUB 3
 #define NOT_A_SUIT (-1)
+#define GUARANTEED_FLUSH_SUIT 4
 
 #define TWO_FIVE 0
 #define THREE_FIVE 1
