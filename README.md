@@ -29,7 +29,7 @@ The extraordinarily lucky aspect of this is that the maximum non-flush key we ha
 
 ## I want to contribute, how might I profile my change?
 
-The project contains a [profiler](src/Profiler.cpp) which might be used to help benchmark your changes.
+The project contains a [profiler](src/Profiler.cpp) which might be used to help benchmark your changes:
 
 ```bash
 g++ -c -std=c++17 -O3 Profiler.cpp
