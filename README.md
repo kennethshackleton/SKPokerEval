@@ -2,10 +2,6 @@
 
 A fast and lightweight 32-bit Texas Hold'em 7-card hand evaluator written in C++.
 
-## CI status
-
-[![Build Status](https://travis-ci.org/kennethshackleton/SKPokerEval.svg)](https://travis-ci.org/kennethshackleton/SKPokerEval)
-
 ## How do I use it?
 
 ```cpp
@@ -31,29 +27,12 @@ Similarly, we assign the integer values 0, 1, 8 and 57 for spade, heart, diamond
 
 The extraordinarily lucky aspect of this is that the maximum non-flush key we have, 7825759, is a 23-bit integer (note 1<<23 = 8388608) and the largest suit key we find, 57*7 = 399, is a 9-bit integer (note 1<<9 = 512). If we bit-shift each card's flush check and add to this its non-flush face value to make a card key in advance, when we aggregate the resulting card keys over a given 7-card hand we generate a 23+9 = 32-bit integer key for the whole hand. This integer key can only just be accommodated by a standard 32-bit `int` type and yet still carries enough information to decide if we're looking at a flush and if not to then look up the rank of the hand.
 
-## How has the project evolved?
-
-Taking v1.1 as the base line, the sampled relative throughput of random [SevenEval](https://github.com/kennethshackleton/SKPokerEval/blob/develop/src/SevenEval.h) access has been seen to have changed as follows (a higher multiple is better).
-
-| Version                                                                       | Relative throughput | Reason                                    |
-| ----------------------------------------------------------------------------- | ------------------: | :---------------------------------------- |
-| [1.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.1)     |                1.00 |                                           |
-| [1.4.2](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.4.2) |                1.18 | Hashing.                                  |
-| [1.6](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.6)     |                1.50 | Remove branching from flush case.         |
-| [1.7](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.7)     |                1.53 | Reduce the hash table.                    |
-| [1.7.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.7.1) |                1.57 | Reduce the rank hash table.               |
-| [1.8](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.8)     |                1.93 | Index cards by bytes.                     |
-| [1.8.1](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.8.1) |                2.04 | Simplify flush key. Smaller offset table. |
-| [1.9](https://github.com/kennethshackleton/SKPokerEval/releases/tag/v1.9)     |                2.04 | Reduce the hash table.                    |
-
-At some point the cost of the sample for-loop iteration becomes relatively significant.
-
 ## I want to contribute, how might I profile my change?
 
 The project contains a [profiler](src/Profiler.cpp) which might be used to help benchmark your changes.
 
 ```bash
-g++ -c -std=c++14 -O3 Profiler.cpp
+g++ -c -std=c++17 -O3 Profiler.cpp
 g++ -o profile Profiler.o
 ./profile
 ```
