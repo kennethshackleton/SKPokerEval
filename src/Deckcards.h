@@ -103,67 +103,30 @@ uint8_t const suit[DECK_SIZE] = {
   INDEX_SPADE, INDEX_HEART, INDEX_DIAMOND, INDEX_CLUB
 };
 
-uint16_t const suit_kronecker[NUMBER_OF_SUITS][DECK_SIZE] = {
-  {
-    ACE_FLUSH,   0, 0, 0,
-    KING_FLUSH,  0, 0, 0,
-    QUEEN_FLUSH, 0, 0, 0,
-    JACK_FLUSH,  0, 0, 0,
-    TEN_FLUSH,   0, 0, 0,
-    NINE_FLUSH,  0, 0, 0,
-    EIGHT_FLUSH, 0, 0, 0,
-    SEVEN_FLUSH, 0, 0, 0,
-    SIX_FLUSH,   0, 0, 0,
-    FIVE_FLUSH,  0, 0, 0,
-    FOUR_FLUSH,  0, 0, 0,
-    THREE_FLUSH, 0, 0, 0,
-    TWO_FLUSH,   0, 0, 0
-  },
-  {
-    0, ACE_FLUSH,   0, 0,
-    0, KING_FLUSH,  0, 0,
-    0, QUEEN_FLUSH, 0, 0,
-    0, JACK_FLUSH,  0, 0,
-    0, TEN_FLUSH,   0, 0,
-    0, NINE_FLUSH,  0, 0,
-    0, EIGHT_FLUSH, 0, 0,
-    0, SEVEN_FLUSH, 0, 0,
-    0, SIX_FLUSH,   0, 0,
-    0, FIVE_FLUSH,  0, 0,
-    0, FOUR_FLUSH,  0, 0,
-    0, THREE_FLUSH, 0, 0,
-    0, TWO_FLUSH,   0, 0
-  },
-  {
-    0, 0, ACE_FLUSH,   0,
-    0, 0, KING_FLUSH,  0,
-    0, 0, QUEEN_FLUSH, 0,
-    0, 0, JACK_FLUSH,  0,
-    0, 0, TEN_FLUSH,   0,
-    0, 0, NINE_FLUSH,  0,
-    0, 0, EIGHT_FLUSH, 0,
-    0, 0, SEVEN_FLUSH, 0,
-    0, 0, SIX_FLUSH,   0,
-    0, 0, FIVE_FLUSH,  0,
-    0, 0, FOUR_FLUSH,  0,
-    0, 0, THREE_FLUSH, 0,
-    0, 0, TWO_FLUSH,   0
-  },
-  {
-    0, 0, 0, ACE_FLUSH,
-    0, 0, 0, KING_FLUSH,
-    0, 0, 0, QUEEN_FLUSH,
-    0, 0, 0, JACK_FLUSH,
-    0, 0, 0, TEN_FLUSH,
-    0, 0, 0, NINE_FLUSH,
-    0, 0, 0, EIGHT_FLUSH,
-    0, 0, 0, SEVEN_FLUSH,
-    0, 0, 0, SIX_FLUSH,
-    0, 0, 0, FIVE_FLUSH,
-    0, 0, 0, FOUR_FLUSH,
-    0, 0, 0, THREE_FLUSH,
-    0, 0, 0, TWO_FLUSH
+uint16_t const suit_kronecker_data[DECK_SIZE + 3] = {
+  0, 0, 0, ACE_FLUSH,
+  0, 0, 0, KING_FLUSH,
+  0, 0, 0, QUEEN_FLUSH,
+  0, 0, 0, JACK_FLUSH,
+  0, 0, 0, TEN_FLUSH,
+  0, 0, 0, NINE_FLUSH,
+  0, 0, 0, EIGHT_FLUSH,
+  0, 0, 0, SEVEN_FLUSH,
+  0, 0, 0, SIX_FLUSH,
+  0, 0, 0, FIVE_FLUSH,
+  0, 0, 0, FOUR_FLUSH,
+  0, 0, 0, THREE_FLUSH,
+  0, 0, 0, TWO_FLUSH,
+  0, 0, 0
+};
+
+class SuitKronecker final {
+public:
+  inline uint16_t const* operator[](uint8_t suit_index) const {
+    return suit_kronecker_data + 3 - suit_index;
   }
 };
+
+SuitKronecker const suit_kronecker{};
 
 #endif
