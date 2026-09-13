@@ -19,6 +19,6 @@
 
 #include "RankData.h"
 
-static auto const& rank_hash = rank_data;
+inline constexpr auto const& rank_hash = rank_data;
 
 #endif // SKPOKEREVAL_RANKHASH_H
