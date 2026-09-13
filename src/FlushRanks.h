@@ -19,7 +19,7 @@
 
 #include <cstdint>
 
-uint16_t const flush_rank_data[4096] = {
+inline constexpr uint16_t flush_rank_data[4096] = {
        0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,   7454,
        0,      0,      0,      0,      0,      0,      0,   5864,      0,      0,      0,   5865,      0,   5866,   5867,   7455,
        0,      0,      0,      0,      0,      0,      0,   5868,      0,      0,      0,   5869,      0,   5870,   5871, 0xd6f0,
@@ -278,7 +278,7 @@ uint16_t const flush_rank_data[4096] = {
        0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,
 };
 
-uint16_t volatile const flush_exception_ranks[2] = {7453, 7454};
+inline constexpr uint16_t flush_exception_ranks[2] = {7453, 7454};
 
 class FlushRanks final {
 public:
@@ -294,6 +294,6 @@ public:
   }
 };
 
-FlushRanks const flush_ranks{};
+inline constexpr FlushRanks flush_ranks{};
 
 #endif // SKPOKEREVAL_FLUSHRANKS_H

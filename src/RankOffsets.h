@@ -19,6 +19,6 @@
 
 #include "RankData.h"
 
-static auto const& offsets = rank_data;
+inline constexpr auto const& offsets = rank_data;
 
 #endif // SKPOKEREVAL_RANKOFFSETS_H

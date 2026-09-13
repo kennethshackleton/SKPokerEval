@@ -19,7 +19,7 @@
 
 #include <cstdint>
 
-int8_t const flush_check_data[256] = {
+inline constexpr int8_t flush_check_data[256] = {
   0, 0, 0, -1, -1, 1, 1, 1, 0, 0, -1, -1, -1, 1, 1, -1, 0, -1, -1, -1,
   -1, 1, -1, -1, -1, -1, -1, -1, -1, 3, 3, 3, -1, -1, -1, -1, -1, 3, 3, -1,
   2, 2, 2, -1, -1, 3, -1, -1, 2, 2, -1, -1, -1, -1, -1, -1, 2, 0, 0, -1,
@@ -42,6 +42,6 @@ public:
   }
 };
 
-FlushCheck const flush_check{};
+inline constexpr FlushCheck flush_check{};
 
 #endif // SKPOKEREVAL_FLUSHCHECK_H
