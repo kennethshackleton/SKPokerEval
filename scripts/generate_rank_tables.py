@@ -313,8 +313,8 @@ def main():
             print(f"  Loaded offsets[{len(offsets)}] + rank_hash[{len(hash_table)}]")
             print("Building key→rank map for verification...")
             key_rank = build_key_rank_map()
-            if verify(key_rank, offsets, hash_table, shift):
-                write_separate_headers(offsets, hash_table, shift, out_dir)
+            if verify(key_rank, offsets, hash_table, shift, multiplier):
+                write_separate_headers(offsets, hash_table, shift, multiplier, out_dir)
             return
 
     print("Building key→rank map...")
