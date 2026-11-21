@@ -87,7 +87,7 @@ int main() {
   }
   std::cout << "Best random access time: " << fastest << " ms" << std::endl;
   if (fastest > 0.0) {
-      double const handsPerSecond = (numberOfHands * 1000L) / fastest;
+      double const handsPerSecond = (numberOfHands * 1000.0) / fastest;
       std::cout << "Best random access rate: " << handsPerSecond
         << " hands/sec" << std::endl;
   }
