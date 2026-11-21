@@ -23,6 +23,7 @@
 #include <iostream>
 #include <chrono>
 #include <limits>
+#include <cstdlib>
 
 template <class T>
 inline void doNotOptimiseAway(T&& datum) {
@@ -70,7 +71,7 @@ public:
       );
     }
     auto const end = std::chrono::high_resolution_clock::now();
-    delete buffer;
+    free(buffer);
     return 1e-6 * std::chrono::duration_cast<std::chrono::nanoseconds>(
       end - start).count();
   }
